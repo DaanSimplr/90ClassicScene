@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import ModelCards from '../../components/ModelCards.astro';
+import Filters from '../../components/Filters.astro';
+import Signup from '../../components/Signup.astro';
+import { sec, blocks } from '../../lib/copy.js';
+import { SITE_NAME, BRANDS, modelBy } from '../../lib/site.js';
+
+const s = sec('Models index');
+// The copy lists the cars per brand; keep that order.
+const brands = BRANDS.filter((b) => s.has(b.name));
+const models = brands.flatMap((b) =>
+  s
+    .f(b.name)
+    .split(' · ')
+    .map((short) => modelBy('short', short)),
+);
+---
+
+<Base title={s.f('Title')} description={s.f('Description')} active="Models">
+  <Hero eyebrow={SITE_NAME} title={s.f('H1')} lead={blocks(s.f('Opening'))} />
+
+  <section class="section">
+    <div class="wrap stack">
+      <Filters groups={[{ key: 'brand', options: brands.map((b) => b.name) }]} />
+      <ModelCards models={models} filterable />
+      <p class="muted">{s.f('Closing line')}</p>
+    </div>
+  </section>
+
+  <Signup line={s.f('Signup box line')} />
+</Base>

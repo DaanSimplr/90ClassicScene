@@ -1,0 +1,21 @@
+---
+import Card from './Card.astro';
+import { firstSentence } from '../lib/copy.js';
+
+const { models, filterable = false } = Astro.props;
+---
+
+<div class="grid">
+  {
+    models.map((m) => (
+      <Card
+        href={m.href}
+        eyebrow={m.brand}
+        title={m.name}
+        text={firstSentence(m.s.f('Opening'))}
+        word={m.mark}
+        filter={filterable ? { brand: m.brand } : {}}
+      />
+    ))
+  }
+</div>

@@ -1,0 +1,22 @@
+---
+import AlertForm from './AlertForm.astro';
+import { inline } from '../lib/copy.js';
+import { SIGNUP } from '../lib/site.js';
+
+const { line } = Astro.props;
+---
+
+<section class="section">
+  <div class="wrap">
+    <div class="signup">
+      <div class="signup__text">
+        <h3 set:html={inline(line)} />
+        <p>{SIGNUP.body}</p>
+      </div>
+      <div>
+        <AlertForm />
+        <p class="caption form__caption">{SIGNUP.caption}</p>
+      </div>
+    </div>
+  </div>
+</section>

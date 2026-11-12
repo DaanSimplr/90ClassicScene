@@ -1,0 +1,24 @@
+---
+// Text-only build entries: name, description, then credit with a link to
+// where the build was first shown. No photos, by design (DESIGN.md row 19).
+const { items = [] } = Astro.props;
+---
+
+{
+  items.length > 0 && (
+    <ul class="entries">
+      {items.map((item) => (
+        <li>
+          <p class="eyebrow">{item.chassis}</p>
+          <h3>{item.name}</h3>
+          <p>{item.text}</p>
+          <p class="caption">
+            <a href={item.url} rel="noopener">
+              {item.credit}
+            </a>
+          </p>
+        </li>
+      ))}
+    </ul>
+  )
+}

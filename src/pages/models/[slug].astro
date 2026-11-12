@@ -1,0 +1,156 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import Section from '../../components/Section.astro';
+import Rows from '../../components/Rows.astro';
+import Signup from '../../components/Signup.astro';
+import { sec, blocks, inline, prefixed, LINKS } from '../../lib/copy.js';
+import { MODELS, NAV, modelBy, brandBy } from '../../lib/site.js';
+import { researchFor } from '../../data/models.js';
+import Entries from '../../components/Entries.astro';
+
+export function getStaticPaths() {
+  return MODELS.map((m) => ({ params: { slug: m.slug } }));
+}
+
+const m = modelBy('slug', Astro.params.slug);
+const research = researchFor(Astro.params.slug);
+const s = m.s;
+const shared = sec('Model pages: shared structure');
+const [history, specs, tuning, kits, builds, unique, keep] = shared.h2s;
+
+const columns = specs.body
+  .split('\n')
+  .find((l) => l.startsWith('|'))
+  .split('|')
+  .map((c) => c.trim())
+  .filter(Boolean);
+
+const brand = brandBy(m.brand);
+const related = modelBy('slug', m.related);
+const label = (href) => NAV.find((n) => n.href === href).label;
+const next = [
+  { href: brand.href, title: brand.name, eyebrow: label(LINKS.Brands) },
+  { href: related.href, title: related.name, eyebrow: label(LINKS.Models) },
+  { href: LINKS['The 1990s'], title: label(LINKS['The 1990s']) },
+];
+---
+
+<Base title={s.f('Title')} description={s.f('Description')} active="Models">
+  <Hero eyebrow={m.brand} title={s.f('H1')} lead={blocks(s.f('Opening'))} word={m.mark} />
+
+  <Section title={history.label} split>
+    <div class="prose" set:html={blocks(s.f('History'))} />
+    {
+      research && research.historySources && (
+        <ol class="sources__list sources__list--prose caption">
+          {research.historySources.map((source) => (
+            <li>
+              <a href={source.url} rel="noopener">
+                {source.label}
+              </a>
+            </li>
+          ))}
+        </ol>
+      )
+    }
+  </Section>
+
+  <Section title={specs.label}>
+    <div class="stack">
+      <div class="prose">
+        <p>{prefixed(specs.body, 'Intro line: ')}</p>
+      </div>
+      {m.codes.length > 0 && <ul class="tags">{m.codes.map((code) => <li class="tag">{code}</li>)}</ul>}
+      <div class="panel panel--scroll">
+        <table class="spec-table">
+          <thead>
+            <tr>{columns.map((c) => <th scope="col">{c}</th>)}</tr>
+          </thead>
+          <tbody>
+            {
+              research &&
+                research.rows.map((row) => (
+                  <tr>
+                    {row.cells.map((cell, i) => (i === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>))}
+                    <td>
+                      <a href={`#source-${row.source}`}>[{row.source}]</a>
+                    </td>
+                  </tr>
+                ))
+            }
+          </tbody>
+        </table>
+      </div>
+      {
+        research && (
+          <div class="sources">
+            <ul class="sources__notes caption">
+              {research.notes.map((note) => (
+                <li>{note}</li>
+              ))}
+            </ul>
+            <ol class="sources__list caption">
+              {research.sources.map((source) => (
+                <li id={`source-${source.id}`}>
+                  <a href={source.url} rel="noopener">
+                    {source.label}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
+        )
+      }
+      <p class="caption" set:html={inline(prefixed(specs.body, 'Note under the table: '))} />
+    </div>
+  </Section>
+
+  <Section title={tuning.label} split>
+    <div class="prose" set:html={blocks(s.f('Tuning lead'))} />
+  </Section>
+
+  <Section title={kits.label} split>
+    <div class="prose" set:html={blocks(s.f('Body kits lead'))} />
+    {
+      research && research.kits.length > 0 && (
+        <ul class="entries">
+          {research.kits.map((kit) => (
+            <li>
+              <p class="eyebrow">{kit.fits}</p>
+              <h3>
+                {kit.maker} {kit.name}
+              </h3>
+              <p>{kit.includes}</p>
+              <p class="caption">
+                <a href={kit.url} rel="noopener">
+                  {new URL(kit.url).hostname}
+                </a>
+              </p>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </Section>
+
+  <Section title={builds.label} split>
+    <div class="prose">
+      <p>{prefixed(builds.body, 'Intro line: ')}</p>
+    </div>
+    {research && <Entries items={research.builds} />}
+  </Section>
+
+  <Section title={unique.label} split>
+    <div class="prose">
+      <p>{prefixed(unique.body, 'Intro line: ')}</p>
+    </div>
+    {research && <Entries items={research.unique} />}
+  </Section>
+
+  <Section title={keep.label}>
+    <Rows items={next} />
+  </Section>
+
+  <Signup line={shared.f('Signup box line')} />
+</Base>

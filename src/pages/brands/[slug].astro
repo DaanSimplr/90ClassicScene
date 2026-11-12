@@ -1,0 +1,69 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import Section from '../../components/Section.astro';
+import ModelCards from '../../components/ModelCards.astro';
+import Rows from '../../components/Rows.astro';
+import Signup from '../../components/Signup.astro';
+import { sec, blocks, LINKS } from '../../lib/copy.js';
+import { BRANDS, MODELS, NAV, LABELS } from '../../lib/site.js';
+
+export function getStaticPaths() {
+  return BRANDS.map((b) => ({ params: { slug: b.slug } }));
+}
+
+const brand = BRANDS.find((b) => b.slug === Astro.params.slug);
+const s = brand.s;
+const shared = sec('Brand pages: shared structure');
+const named = (text) => text.replace(/\[brand\]/gi, brand.name);
+
+// The first four shared headings each have a matching field on the brand's page.
+const COMING = /\s*\(([^()]+): Model page coming\.\)/;
+const parts = shared.h2s.slice(0, 4).map((h) => {
+  const title = named(h.label);
+  const text = s.f(title);
+  const coming = text.match(COMING);
+  return {
+    title,
+    html: blocks(text.replace(COMING, '')),
+    coming: coming ? coming[1].split(', ') : [],
+  };
+});
+const onSite = named(shared.h2s[4].label);
+const models = MODELS.filter((m) => m.brand === brand.name);
+const era = NAV.find((n) => n.href === LINKS['The 1990s']);
+const line = s.has('Signup box line (this page)')
+  ? s.f('Signup box line (this page)')
+  : named(shared.f('Signup box line'));
+---
+
+<Base title={s.f('Title')} description={s.f('Description')} active="Brands">
+  <Hero eyebrow={NAV.find((n) => n.href === LINKS.Brands).label} title={s.f('H1')} lead={blocks(s.f('Opening'))} word={brand.name} />
+
+  {
+    parts.map((part) => (
+      <Section title={part.title} split>
+        <div class="prose" set:html={part.html} />
+        {part.coming.length > 0 && (
+          <ul class="coming">
+            {part.coming.map((name) => (
+              <li>
+                <span>{name}</span>
+                <span class="label">{LABELS.coming}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </Section>
+    ))
+  }
+
+  <Section title={onSite}>
+    <div class="stack">
+      {models.length > 0 && <ModelCards models={models} />}
+      <Rows items={[{ href: era.href, title: era.label }]} />
+    </div>
+  </Section>
+
+  <Signup line={line} />
+</Base>

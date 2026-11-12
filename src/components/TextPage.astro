@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from './Hero.astro';
+import Section from './Section.astro';
+import { sec, blocks } from '../lib/copy.js';
+import { SITE_NAME } from '../lib/site.js';
+
+// A page that is a heading, an opening and a run of H2 sections of text.
+const { section } = Astro.props;
+const s = sec(section);
+---
+
+<Base title={s.f('Title')} description={s.f('Description')}>
+  <Hero eyebrow={SITE_NAME} title={s.f('H1')} lead={blocks(s.f('Opening'))} />
+  {
+    s.h2s.map((part) => (
+      <Section title={part.label} split>
+        <div class="prose" set:html={blocks(part.body)} />
+      </Section>
+    ))
+  }
+</Base>

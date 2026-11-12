@@ -1,0 +1,47 @@
+---
+import { sec, inline } from '../lib/copy.js';
+import { SIGNUP } from '../lib/site.js';
+
+// No email service is chosen yet (CONTEXT.md), so nothing can be saved. The
+// form checks the address and then says so, using the messages from COPY.md.
+const alerts = sec('Get alerts');
+const invalid = alerts.f('Error: invalid address');
+const failed = alerts.f('Error: something went wrong');
+const { page = false } = Astro.props;
+---
+
+<form class:list={['form', page && 'form--page']} method="post" novalidate data-alert-form>
+  <div class="form__row">
+    <div class="field">
+      <input
+        class="input"
+        type="email"
+        name="email"
+        autocomplete="email"
+        placeholder={SIGNUP.inputLabel}
+        aria-label={SIGNUP.inputLabel}
+      />
+    </div>
+    <button class="btn btn--alert" type="submit">{SIGNUP.buttonLabel}</button>
+  </div>
+  <p class="form__msg" role="alert" data-msg="invalid" hidden>
+    Error: <Fragment set:html={inline(invalid)} />
+  </p>
+  <p class="form__msg" role="alert" data-msg="failed" hidden>
+    Error: <Fragment set:html={inline(failed)} />
+  </p>
+</form>
+
+<script>
+  document.querySelectorAll('[data-alert-form]').forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const value = form.querySelector('input').value.trim();
+      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+      form.classList.add('is-error');
+      form.querySelectorAll('[data-msg]').forEach((msg) => {
+        msg.hidden = msg.dataset.msg !== (valid ? 'failed' : 'invalid');
+      });
+    });
+  });
+</script>

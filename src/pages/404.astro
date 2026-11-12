@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import { sec, blocks, paragraphs, isActions, actions } from '../lib/copy.js';
+import { SITE_NAME } from '../lib/site.js';
+
+const s = sec('Page not found (404)');
+const body = paragraphs(s.f('Body'));
+const lead = blocks(body.filter((p) => !isActions(p)).join('\n\n'));
+---
+
+<Base title={s.f('Title')}>
+  <Hero eyebrow={SITE_NAME} title={s.f('H1')} lead={lead}>
+    <Fragment set:html={actions(body.find(isActions))} />
+  </Hero>
+</Base>

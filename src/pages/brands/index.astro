@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import Card from '../../components/Card.astro';
+import Signup from '../../components/Signup.astro';
+import { sec, blocks, paragraphs, leadItems } from '../../lib/copy.js';
+import { SITE_NAME, brandBy } from '../../lib/site.js';
+
+const s = sec('Brands index');
+const opening = paragraphs(s.f('Opening'));
+const lead = blocks(opening.filter((p) => !p.startsWith('- ')).join('\n\n'));
+const brands = leadItems(s.f('Opening')).map((item) => ({ ...brandBy(item.lead), text: item.text }));
+---
+
+<Base title={s.f('Title')} description={s.f('Description')} active="Brands">
+  <Hero eyebrow={SITE_NAME} title={s.f('H1')} lead={lead} />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid">
+        {brands.map((b) => <Card href={b.href} title={b.name} text={b.text} word={b.name} />)}
+      </div>
+    </div>
+  </section>
+
+  <Signup line={s.f('Signup box line')} />
+</Base>

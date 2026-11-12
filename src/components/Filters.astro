@@ -1,0 +1,48 @@
+---
+// Filter bar: text options, the active one underlined in cyan.
+// groups: [{ key, label, options: [string] }]
+const { groups } = Astro.props;
+---
+
+<div class="filters" data-filters>
+  {
+    groups.map((group) => (
+      <div class="filter" data-filter-group={group.key}>
+        {group.label && <p class="eyebrow">{group.label}</p>}
+        {group.options.map((option) => (
+          <button type="button" aria-pressed="false" data-value={option}>
+            {option}
+          </button>
+        ))}
+      </div>
+    ))
+  }
+</div>
+
+<script>
+  document.querySelectorAll('[data-filters]').forEach((bar) => {
+    const items = [...document.querySelectorAll('[data-filter-item]')];
+    const empty = document.querySelector('[data-filter-empty]');
+    bar.addEventListener('click', (event) => {
+      const button = event.target.closest('button');
+      if (!button) return;
+      const group = button.closest('[data-filter-group]');
+      const wasOn = button.getAttribute('aria-pressed') === 'true';
+      group.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', 'false'));
+      if (!wasOn) button.setAttribute('aria-pressed', 'true');
+
+      const active = {};
+      bar.querySelectorAll('[data-filter-group]').forEach((g) => {
+        const on = g.querySelector('[aria-pressed="true"]');
+        if (on) active[g.dataset.filterGroup] = on.dataset.value;
+      });
+      let shown = 0;
+      items.forEach((item) => {
+        const match = Object.entries(active).every(([key, value]) => item.dataset[key] === value);
+        item.hidden = !match;
+        if (match) shown += 1;
+      });
+      if (empty) empty.hidden = shown > 0;
+    });
+  });
+</script>

@@ -1,0 +1,15 @@
+---
+import Frame from './Frame.astro';
+
+const { href, eyebrow, title, text, word, filter = {} } = Astro.props;
+const data = Object.fromEntries(Object.entries(filter).map(([k, v]) => [`data-${k}`, v]));
+---
+
+<a class="card" href={href} {...data} data-filter-item={Object.keys(filter).length ? '' : undefined}>
+  <Frame word={word} />
+  <div class="card__body">
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <h3>{title}</h3>
+    {text && <p>{text}</p>}
+  </div>
+</a>

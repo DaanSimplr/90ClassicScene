@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import Filters from '../components/Filters.astro';
+import Signup from '../components/Signup.astro';
+import { sec, blocks, prefixed } from '../lib/copy.js';
+import { SITE_NAME, BRANDS, MODELS } from '../lib/site.js';
+
+const s = sec('Gallery');
+const [brand, model, generation] = s.f('Filters').split(' · ');
+const groups = [
+  { key: 'brand', label: brand, options: BRANDS.map((b) => b.name) },
+  { key: 'model', label: model, options: MODELS.map((m) => m.short) },
+  { key: 'generation', label: generation, options: MODELS.flatMap((m) => m.codes) },
+];
+const illustrations = s.h2('Illustrations');
+---
+
+<Base title={s.f('Title')} description={s.f('Description')} active="Gallery">
+  <Hero eyebrow={SITE_NAME} title={s.f('H1')} lead={blocks(s.f('Opening'))} />
+
+  <section class="section">
+    <div class="wrap stack">
+      <Filters groups={groups} />
+      <!-- No licensed photos have been supplied yet, so every filter is empty. -->
+      <p class="empty" data-filter-empty>{s.f('Empty-filter message')}</p>
+    </div>
+  </section>
+
+  <Section title={illustrations.label} split>
+    <div class="prose">
+      <p>{prefixed(illustrations.body, 'Intro: ')}</p>
+    </div>
+  </Section>
+
+  <Signup line={s.f('Signup box line')} />
+</Base>

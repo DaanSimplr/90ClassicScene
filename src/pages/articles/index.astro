@@ -1,0 +1,41 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import Card from '../../components/Card.astro';
+import Signup from '../../components/Signup.astro';
+import { sec, blocks, paragraphs } from '../../lib/copy.js';
+import { SITE_NAME, ARTICLES } from '../../lib/site.js';
+
+const s = sec('Articles index');
+const opening = paragraphs(s.f('Opening'));
+const lead = blocks(opening.filter((p) => !p.startsWith('- ')).join('\n\n'));
+const titles = s
+  .f('Opening')
+  .split('\n')
+  .map((l) => l.match(/^- \*\*(.+)\*\*$/))
+  .filter(Boolean)
+  .map((m) => m[1]);
+const cards = titles.map((title) => {
+  const article = ARTICLES.find((a) => title.startsWith(a.h1) || a.h1.startsWith(title));
+  if (!article) throw new Error(`No article page for "${title}"`);
+  return { title, article };
+});
+---
+
+<Base title={s.f('Title')} description={s.f('Description')} active="Articles">
+  <Hero eyebrow={SITE_NAME} title={s.f('H1')} lead={lead} />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid">
+        {
+          cards.map(({ title, article }) => (
+            <Card href={article.href} title={title} text={article.s.f('Description')} word={article.mark} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <Signup line={s.f('Signup box line')} />
+</Base>

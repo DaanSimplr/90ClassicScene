@@ -1,0 +1,28 @@
+---
+import Frame from './Frame.astro';
+import { inline } from '../lib/copy.js';
+
+// With `word` or `wall` the hero has a full-bleed image frame and the green
+// underglow line. Without them it is a plain page head.
+const { eyebrow, title, lead, display = false, word, wall } = Astro.props;
+const framed = Boolean(word || wall);
+---
+
+<div class="hero">
+  {
+    framed && (
+      <>
+        <Frame hero word={word} wall={wall} />
+        <div class="hero__line" />
+      </>
+    )
+  }
+  <div class="wrap">
+    <div class={framed ? 'hero__text' : 'pagehead'}>
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1 class:list={[display && 'display']} set:html={inline(title)} />
+      {lead && <div class="lead" set:html={lead} />}
+      <slot />
+    </div>
+  </div>
+</div>

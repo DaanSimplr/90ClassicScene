@@ -1,0 +1,50 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import Section from '../../components/Section.astro';
+import ModelCards from '../../components/ModelCards.astro';
+import Signup from '../../components/Signup.astro';
+import { sec, blocks, inline, LINKS } from '../../lib/copy.js';
+import { ARTICLES, NAV, modelBy } from '../../lib/site.js';
+
+export function getStaticPaths() {
+  return ARTICLES.map((a) => ({ params: { slug: a.slug } }));
+}
+
+const article = ARTICLES.find((a) => a.slug === Astro.params.slug);
+const s = article.s;
+const shared = sec('Articles: shared structure');
+// The outline in COPY.md is a list of "- **H2: Heading.** What it covers".
+const outline = s
+  .f('Outline')
+  .split('\n')
+  .map((l) => l.match(/^- \*\*H2: (.+?)\*\*\s*(.*)$/))
+  .filter(Boolean)
+  .map((m) => ({ title: m[1].replace(/\.$/, ''), text: m[2] }));
+const cars = article.cars.map((slug) => modelBy('slug', slug));
+---
+
+<Base title={s.f('Title')} description={s.f('Description')} active="Articles">
+  <Hero
+    eyebrow={NAV.find((n) => n.href === LINKS.Articles).label}
+    title={s.f('H1')}
+    lead={blocks(s.f('Opening'))}
+    word={article.mark}
+  />
+
+  {
+    outline.map((part) => (
+      <Section title={part.title} split>
+        <div class="prose">
+          <p set:html={inline(part.text)} />
+        </div>
+      </Section>
+    ))
+  }
+
+  <Section title={shared.h2('Cars in this article').label}>
+    <ModelCards models={cars} />
+  </Section>
+
+  <Signup line={shared.f('Signup box line')} />
+</Base>

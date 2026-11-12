@@ -1,0 +1,80 @@
+---
+import '@fontsource/chakra-petch/600.css';
+import '@fontsource/chakra-petch/700.css';
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/500.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '../styles/global.css';
+import { NAV, FOOTER, SITE_NAME } from '../lib/site.js';
+import { inline } from '../lib/copy.js';
+
+const { title, description, active } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" href="data:," />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/">{SITE_NAME}</a>
+        <nav aria-label="Main">
+          <ul class="nav nav--bar">
+            {
+              NAV.map((item) => (
+                <li>
+                  <a href={item.href} aria-current={item.label === active ? 'page' : undefined}>
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+          <details class="menu">
+            <summary>Menu</summary>
+            <ul class="nav">
+              {
+                NAV.map((item) => (
+                  <li>
+                    <a href={item.href} aria-current={item.label === active ? 'page' : undefined}>
+                      {item.label}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </details>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p class="site-footer__tag">{FOOTER.tagline}</p>
+        <ul class="site-footer__links">
+          {
+            FOOTER.links.map((item) => (
+              <li>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+        <p set:html={inline(FOOTER.corrections)} />
+        <p class="caption">{FOOTER.author}</p>
+      </div>
+    </footer>
+  </body>
+</html>

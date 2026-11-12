@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import AlertForm from '../components/AlertForm.astro';
+import { sec, blocks, paragraphs, leadItems } from '../lib/copy.js';
+import { SITE_NAME } from '../lib/site.js';
+
+const s = sec('Get alerts');
+// The opening's second paragraph is the form itself.
+const lead = blocks(paragraphs(s.f('Opening'))[0]);
+const what = s.h2s[0];
+const rest = paragraphs(what.body)
+  .filter((p) => !p.startsWith('- '))
+  .join('\n\n');
+---
+
+<Base title={s.f('Title')} description={s.f('Description')} active="Get alerts">
+  <Hero eyebrow={SITE_NAME} title={s.f('H1')} lead={lead}>
+    <AlertForm page />
+  </Hero>
+
+  <Section title={what.label}>
+    <div class="stack">
+      <ul class="points points--3">
+        {
+          leadItems(what.body).map((item) => (
+            <li>
+              <h3>{item.lead}</h3>
+              <p>{item.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="prose" set:html={blocks(rest)} />
+    </div>
+  </Section>
+</Base>

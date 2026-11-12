@@ -1,0 +1,18 @@
+---
+// A list of rows that each link somewhere: { href, title, text?, eyebrow? }
+const { items } = Astro.props;
+---
+
+<ul class="rows">
+  {
+    items.map((item) => (
+      <li>
+        <a href={item.href}>
+          <h3>{item.title}</h3>
+          {item.text && <p>{item.text}</p>}
+          {item.eyebrow && <p class="eyebrow">{item.eyebrow}</p>}
+        </a>
+      </li>
+    ))
+  }
+</ul>
