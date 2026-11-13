@@ -166,4 +166,25 @@ export function prefixed(body, prefix) {
   return line ? line.slice(prefix.length).trim() : '';
 }
 
-export const firstSentence = (t) => (t.match(/^.*?[.!?](?=\s+[A-Z]|$)/s) || [t])[0];
+// Turns "(source 2)" and "(sources 1, 3)" in rendered HTML into links to the
+// numbered source list, whose items carry the ids `${prefix}-N`.
+export const citeLinks = (html, prefix) =>
+  html.replace(
+    /\((sources?) ([\d, ]+)\)/g,
+    (m, word, nums) =>
+      `(${word} ${nums
+        .split(',')
+        .map((n) => n.trim())
+        .map((n) => `<a href="#${prefix}-${n}">${n}</a>`)
+        .join(', ')})`,
+  );
+
+// "1. Publisher, title, date: https://..." lines, as { n, label, url }.
+export const sourceItems = (body) =>
+  body
+    .split('\n')
+    .map((l) => l.match(/^(\d+)\.\s+(.*?):\s+(https?:\/\/\S+)\s*$/))
+    .filter(Boolean)
+    .map((m) => ({ n: m[1], label: m[2], url: m[3] }));
+
+export const firstSentence =(t) => (t.match(/^.*?[.!?](?=\s+[A-Z]|$)/s) || [t])[0];

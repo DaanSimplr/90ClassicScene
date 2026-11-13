@@ -4,7 +4,7 @@ import Hero from '../../components/Hero.astro';
 import Section from '../../components/Section.astro';
 import Rows from '../../components/Rows.astro';
 import Signup from '../../components/Signup.astro';
-import { sec, blocks, inline, prefixed, LINKS } from '../../lib/copy.js';
+import { sec, blocks, inline, prefixed, citeLinks, sourceItems, LINKS } from '../../lib/copy.js';
 import { MODELS, NAV, modelBy, brandBy } from '../../lib/site.js';
 import { researchFor } from '../../data/models.js';
 import Entries from '../../components/Entries.astro';
@@ -74,7 +74,9 @@ const next = [
                   <tr>
                     {row.cells.map((cell, i) => (i === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>))}
                     <td>
-                      <a href={`#source-${row.source}`}>[{row.source}]</a>
+                      {row.sources.map((id) => (
+                        <a href={`#source-${id}`}>[{id}]</a>
+                      ))}
                     </td>
                   </tr>
                 ))
@@ -107,7 +109,30 @@ const next = [
   </Section>
 
   <Section title={tuning.label} split>
-    <div class="prose" set:html={blocks(s.f('Tuning lead'))} />
+    <div class="prose">
+      <Fragment set:html={blocks(s.f('Tuning lead'))} />
+      {
+        s.has('Tuning detail') && (
+          <>
+            <p class="caption">{prefixed(tuning.body, 'Intro line: ')}</p>
+            <Fragment set:html={citeLinks(blocks(s.f('Tuning detail')), 'tuning-source')} />
+          </>
+        )
+      }
+    </div>
+    {
+      s.has('Tuning sources') && (
+        <ol class="sources__list sources__list--prose caption">
+          {sourceItems(s.f('Tuning sources')).map((source) => (
+            <li id={`tuning-source-${source.n}`}>
+              <a href={source.url} rel="noopener">
+                {source.label}
+              </a>
+            </li>
+          ))}
+        </ol>
+      )
+    }
   </Section>
 
   <Section title={kits.label} split>

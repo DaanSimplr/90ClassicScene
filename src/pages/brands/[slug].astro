@@ -5,7 +5,8 @@ import Section from '../../components/Section.astro';
 import ModelCards from '../../components/ModelCards.astro';
 import Rows from '../../components/Rows.astro';
 import Signup from '../../components/Signup.astro';
-import { sec, blocks, LINKS } from '../../lib/copy.js';
+import Sources from '../../components/Sources.astro';
+import { sec, blocks, citeLinks, sourceItems, LINKS } from '../../lib/copy.js';
 import { BRANDS, MODELS, NAV, LABELS } from '../../lib/site.js';
 
 export function getStaticPaths() {
@@ -25,13 +26,16 @@ const parts = shared.h2s.slice(0, 4).map((h) => {
   const coming = text.match(COMING);
   return {
     title,
-    html: blocks(text.replace(COMING, '')),
+    html: citeLinks(blocks(text.replace(COMING, '')), 'source'),
     coming: coming ? coming[1].split(', ') : [],
   };
 });
 const onSite = named(shared.h2s[4].label);
 const models = MODELS.filter((m) => m.brand === brand.name);
 const era = NAV.find((n) => n.href === LINKS['The 1990s']);
+// "Sources" is the field label in COPY.md and doubles as the section heading.
+const SOURCES = 'Sources';
+const sources = s.has(SOURCES) ? sourceItems(s.f(SOURCES)) : [];
 const line = s.has('Signup box line (this page)')
   ? s.f('Signup box line (this page)')
   : named(shared.f('Signup box line'));
@@ -64,6 +68,14 @@ const line = s.has('Signup box line (this page)')
       <Rows items={[{ href: era.href, title: era.label }]} />
     </div>
   </Section>
+
+  {
+    sources.length > 0 && (
+      <Section title={SOURCES} split>
+        <Sources items={sources} />
+      </Section>
+    )
+  }
 
   <Signup line={line} />
 </Base>

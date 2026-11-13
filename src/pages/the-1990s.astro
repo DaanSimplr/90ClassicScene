@@ -3,45 +3,66 @@ import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import Section from '../components/Section.astro';
 import Signup from '../components/Signup.astro';
-import { sec, blocks } from '../lib/copy.js';
+import Sources from '../components/Sources.astro';
+import { sec, blocks, inline, citeLinks, sourceItems } from '../lib/copy.js';
 import { SITE_NAME, MODELS } from '../lib/site.js';
 
 const s = sec('The 1990s');
+const cite = (html) => citeLinks(html, 'source');
 const parts = s.h2s.filter((h) => h.label !== 'Timeline');
 const timeline = s.h2('Timeline');
-// The copy fixes the era's two ends in its opening line; the dates in between
-// are still to be filled from sources, so the cars are listed without years.
-const [from, to] = s.f('Opening').match(/\b(19|20)\d\d\b/g);
+
+// Timeline entries in COPY.md are "- YEAR: text". Each car named in an entry
+// links to its model page (first mention per entry).
+const reEsc = (t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const linkModels = (html) =>
+  MODELS.reduce(
+    (out, m) => out.replace(new RegExp(`\\b${reEsc(m.short)}\\b`), `<a href="${m.href}">${m.short}</a>`),
+    html,
+  );
+const entries = timeline.body
+  .split('\n')
+  .map((l) => l.match(/^- (\d{4}): (.+)$/))
+  .filter(Boolean)
+  .map((m) => ({ year: m[1], html: cite(linkModels(inline(m[2]))) }));
+
+const SOURCES = 'Sources';
+const sources = s.has(SOURCES) ? sourceItems(s.f(SOURCES)) : [];
 ---
 
 <Base title={s.f('Title')} description={s.f('Description')} active="The 1990s">
-  <Hero eyebrow={SITE_NAME} title={s.f('H1')} lead={blocks(s.f('Opening'))} word="1990s" />
+  <Hero eyebrow={SITE_NAME} title={s.f('H1')} lead={cite(blocks(s.f('Opening')))} word="1990s" />
 
   {
     parts.map((part) => (
       <Section title={part.label} split>
-        <div class="prose" set:html={blocks(part.body)} />
+        <div class="prose" set:html={cite(blocks(part.body))} />
       </Section>
     ))
   }
 
   <Section title={timeline.label} split>
     <div class="timeline">
-      <p class="timeline__year">{from}</p>
-      <div class="timeline__events">
-        <ul>
-          {
-            MODELS.map((m) => (
-              <li>
-                <a href={m.href}>{m.name}</a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-      <p class="timeline__year">{to}</p>
+      {
+        entries.map((entry) => (
+          <>
+            <p class="timeline__year">{entry.year}</p>
+            <div class="timeline__events">
+              <p set:html={entry.html} />
+            </div>
+          </>
+        ))
+      }
     </div>
   </Section>
+
+  {
+    sources.length > 0 && (
+      <Section title={SOURCES} split>
+        <Sources items={sources} />
+      </Section>
+    )
+  }
 
   <Signup line={s.f('Signup box line')} />
 </Base>

@@ -753,6 +753,18 @@ a:hover {
   margin-top: var(--space-2);
 }
 
+/* A page's own numbered source list, in its own section. */
+.sources__list--page {
+  padding-left: 20px;
+  max-width: var(--measure);
+}
+.sources__list--page li + li {
+  margin-top: var(--space-2);
+}
+.sources__list--page a {
+  overflow-wrap: anywhere;
+}
+
 /* Text-only entries: body kits and builds. */
 .entries {
   list-style: none;
@@ -834,6 +846,9 @@ a:hover {
 }
 .timeline__events li {
   padding: var(--space-2) 0;
+}
+.timeline__events p {
+  padding: var(--space-3) 0;
 }
 .timeline__end {
   grid-column: 1 / -1;

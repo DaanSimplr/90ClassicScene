@@ -4,7 +4,8 @@ import Hero from '../../components/Hero.astro';
 import Section from '../../components/Section.astro';
 import ModelCards from '../../components/ModelCards.astro';
 import Signup from '../../components/Signup.astro';
-import { sec, blocks, inline, LINKS } from '../../lib/copy.js';
+import Sources from '../../components/Sources.astro';
+import { sec, blocks, inline, citeLinks, sourceItems, LINKS } from '../../lib/copy.js';
 import { ARTICLES, NAV, modelBy } from '../../lib/site.js';
 
 export function getStaticPaths() {
@@ -14,13 +15,28 @@ export function getStaticPaths() {
 const article = ARTICLES.find((a) => a.slug === Astro.params.slug);
 const s = article.s;
 const shared = sec('Articles: shared structure');
-// The outline in COPY.md is a list of "- **H2: Heading.** What it covers".
-const outline = s
-  .f('Outline')
-  .split('\n')
-  .map((l) => l.match(/^- \*\*H2: (.+?)\*\*\s*(.*)$/))
-  .filter(Boolean)
-  .map((m) => ({ title: m[1].replace(/\.$/, ''), text: m[2] }));
+const cite = (html) => citeLinks(html, 'source');
+
+// With a written body, each "#### Heading" in it becomes a section.
+// Without one, the outline ("- **H2: Heading.** What it covers") stands in.
+const parts = s.has('Body')
+  ? s
+      .f('Body')
+      .split(/^#### /m)
+      .map((chunk) => chunk.trim())
+      .filter(Boolean)
+      .map((chunk) => {
+        const [title, ...rest] = chunk.split('\n');
+        return { title: title.trim(), html: cite(blocks(rest.join('\n'))) };
+      })
+  : s
+      .f('Outline')
+      .split('\n')
+      .map((l) => l.match(/^- \*\*H2: (.+?)\*\*\s*(.*)$/))
+      .filter(Boolean)
+      .map((m) => ({ title: m[1].replace(/\.$/, ''), html: `<p>${inline(m[2])}</p>` }));
+
+const sources = s.has('Sources') ? sourceItems(s.f('Sources')) : [];
 const cars = article.cars.map((slug) => modelBy('slug', slug));
 ---
 
@@ -33,13 +49,19 @@ const cars = article.cars.map((slug) => modelBy('slug', slug));
   />
 
   {
-    outline.map((part) => (
+    parts.map((part) => (
       <Section title={part.title} split>
-        <div class="prose">
-          <p set:html={inline(part.text)} />
-        </div>
+        <div class="prose" set:html={part.html} />
       </Section>
     ))
+  }
+
+  {
+    sources.length > 0 && (
+      <Section title={shared.h2('Sources').label} split>
+        <Sources items={sources} />
+      </Section>
+    )
   }
 
   <Section title={shared.h2('Cars in this article').label}>

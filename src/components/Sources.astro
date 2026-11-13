@@ -1,0 +1,19 @@
+---
+// Numbered source list. Each item gets the id `${prefix}-N`, which the
+// "(source N)" links in the text point to (see citeLinks in copy.js).
+const { items = [], prefix = 'source' } = Astro.props;
+---
+
+{
+  items.length > 0 && (
+    <ol class="sources__list sources__list--page caption">
+      {items.map((source) => (
+        <li id={`${prefix}-${source.n}`}>
+          <a href={source.url} rel="noopener">
+            {source.label}
+          </a>
+        </li>
+      ))}
+    </ol>
+  )
+}
