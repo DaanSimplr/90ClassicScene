@@ -25,8 +25,17 @@ const NOISE = 3; // JPEG noise around the background, made fully transparent
 const FULL = 100;
 // Road strip in source columns (no lettering inside it), and the rows where it
 // is fully visible; it fades to nothing at the crop's top and bottom edges.
-const ROAD = { from: 884, to: 1037 };
+// It starts right after the N's anti-aliased edge (solid to column 879), so
+// the tyre smoke drifting left of the road is not recoloured with SHIN.
+const ROAD = { from: 882, to: 1037 };
 const SOLID = { from: 230, to: 470 };
+// The lettering is recoloured: the artwork's cream letters (about 241, 237,
+// 230) become white for SHIN (left of the road) and the kanji's own red for
+// YASŌ (right of the road). Letter pixels are told apart from the red kanji
+// by being neutral (no strong hue); their coverage is kept for smooth edges.
+const CREAM_DIFF = 220; // how far solid cream is from the background
+const SHIN = [255, 255, 255];
+const YASO = [144, 49, 53]; // median colour of the kanji 深夜走
 
 const smooth = (t) => t * t * (3 - 2 * t);
 const roadFade = (y) => {
@@ -53,7 +62,14 @@ for (let y = 0; y < info.height; y++) {
       out[o + c] = Math.max(0, Math.min(255, Math.round(v)));
     }
     const sx = x + CROP.left;
-    if (sx >= ROAD.from && sx <= ROAD.to) alpha *= roadFade(y + CROP.top);
+    const inRoad = sx >= ROAD.from && sx <= ROAD.to;
+    const spread = Math.max(...diff) - Math.min(...diff);
+    if (!inRoad && far > NOISE && spread < far * 0.25 + 6) {
+      const target = sx < ROAD.from ? SHIN : YASO;
+      alpha = Math.min(1, (far - NOISE) / (CREAM_DIFF - NOISE));
+      for (let c = 0; c < 3; c++) out[o + c] = target[c];
+    }
+    if (inRoad) alpha *= roadFade(y + CROP.top);
     out[o + 3] = Math.round(alpha * 255);
   }
 }
