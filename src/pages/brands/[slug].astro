@@ -6,6 +6,7 @@ import ModelCards from '../../components/ModelCards.astro';
 import Rows from '../../components/Rows.astro';
 import Signup from '../../components/Signup.astro';
 import Sources from '../../components/Sources.astro';
+import { BRAND_IMAGES } from '../../data/images.js';
 import { sec, blocks, citeLinks, sourceItems, LINKS } from '../../lib/copy.js';
 import { BRANDS, MODELS, NAV, LABELS } from '../../lib/site.js';
 
@@ -42,7 +43,13 @@ const line = s.has('Signup box line (this page)')
 ---
 
 <Base title={s.f('Title')} description={s.f('Description')} active="Brands">
-  <Hero eyebrow={NAV.find((n) => n.href === LINKS.Brands).label} title={s.f('H1')} lead={blocks(s.f('Opening'))} word={brand.name} />
+  <Hero
+    eyebrow={NAV.find((n) => n.href === LINKS.Brands).label}
+    title={s.f('H1')}
+    lead={blocks(s.f('Opening'))}
+    word={brand.name}
+    image={BRAND_IMAGES[brand.slug]?.hero}
+  />
 
   {
     parts.map((part) => (

@@ -1,6 +1,7 @@
 ---
 import Card from './Card.astro';
 import { firstSentence } from '../lib/copy.js';
+import { MODEL_IMAGES } from '../data/images.js';
 
 const { models, filterable = false } = Astro.props;
 ---
@@ -14,6 +15,7 @@ const { models, filterable = false } = Astro.props;
         title={m.name}
         text={firstSentence(m.s.f('Opening'))}
         word={m.mark}
+        image={MODEL_IMAGES[m.slug]?.card}
         filter={filterable ? { brand: m.brand } : {}}
       />
     ))

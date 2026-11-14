@@ -14,7 +14,8 @@ export const FOOTER = {
   corrections: footer[2],
   author: footer[3],
 };
-// The site has no name yet: this is the "[SITE NAME]" placeholder from COPY.md.
+// The site name, taken from the footer line in COPY.md. The header shows the
+// logo image instead and uses this as its alt text.
 export const SITE_NAME = FOOTER.tagline.split(':')[0];
 
 const signup = quote(wide.f('Alert signup box'));
@@ -26,6 +27,30 @@ export const LABELS = {
   coming: wide.f('Label on cars without a page yet'),
   illustration: wide.f('Label on AI-generated images'),
 };
+// The strip on every AI image carries the label up to its first comma:
+// "Illustration: AI-generated" (shown in capitals by the eyebrow style).
+LABELS.strip = LABELS.illustration.split(',')[0];
+
+// Credit lines, filled from the image data in src/data/images.js.
+// [photographer] is plain text; [licence] and [source] become links.
+const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const fillCredit = (template, c) =>
+  template
+    .replace('[photographer]', esc(c.author))
+    .replace('[licence]', `<a href="${esc(c.licenseUrl)}" rel="license noopener">${esc(c.license)}</a>`)
+    .replace('[source]', `<a href="${esc(c.source)}" rel="noopener">${esc(c.sourceName)}</a>`);
+const photoLine = wide.f('Photo credit line');
+const gradedNote = wide.f('Note after the credit on colour-graded photos');
+const aiLine = wide.f('Credit line under AI images made from a photo');
+
+// HTML credit for an image from images.js, or '' when none is needed
+// (fully AI atmosphere images carry the label only).
+export function creditHtml(img) {
+  if (!img) return '';
+  if (img.basedOn) return fillCredit(aiLine, img.basedOn);
+  if (img.ai || !img.author) return '';
+  return `${fillCredit(photoLine, img)}.${img.modified ? ` ${gradedNote}` : ''}`;
+}
 
 const model = (slug, name, brand, short, related, mark = short) => {
   const s = sec(name);

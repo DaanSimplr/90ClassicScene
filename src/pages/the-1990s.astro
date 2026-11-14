@@ -6,6 +6,7 @@ import Signup from '../components/Signup.astro';
 import Sources from '../components/Sources.astro';
 import { sec, blocks, inline, citeLinks, sourceItems } from '../lib/copy.js';
 import { SITE_NAME, MODELS } from '../lib/site.js';
+import { PAGE_IMAGES } from '../data/images.js';
 
 const s = sec('The 1990s');
 const cite = (html) => citeLinks(html, 'source');
@@ -31,7 +32,7 @@ const sources = s.has(SOURCES) ? sourceItems(s.f(SOURCES)) : [];
 ---
 
 <Base title={s.f('Title')} description={s.f('Description')} active="The 1990s">
-  <Hero eyebrow={SITE_NAME} title={s.f('H1')} lead={cite(blocks(s.f('Opening')))} word="1990s" />
+  <Hero eyebrow={SITE_NAME} title={s.f('H1')} lead={cite(blocks(s.f('Opening')))} image={PAGE_IMAGES['the-1990s']} />
 
   {
     parts.map((part) => (

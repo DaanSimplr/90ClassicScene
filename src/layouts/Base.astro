@@ -25,7 +25,17 @@ const { title, description, active } = Astro.props;
     <a class="skip" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="wrap">
-        <a class="brand" href="/">{SITE_NAME}</a>
+        <a class="brand" href="/">
+          <img
+            class="brand__logo"
+            src="/brand/shinyaso-logo-400.webp"
+            srcset="/brand/shinyaso-logo-400.webp 400w, /brand/shinyaso-logo-800.webp 800w"
+            sizes="188px"
+            width="188"
+            height="63"
+            alt={SITE_NAME}
+          />
+        </a>
         <nav aria-label="Main">
           <ul class="nav nav--bar">
             {

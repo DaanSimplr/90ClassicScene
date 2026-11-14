@@ -1,15 +1,20 @@
 ---
 import Frame from './Frame.astro';
+import { creditHtml } from '../lib/site.js';
 
-const { href, eyebrow, title, text, word, filter = {} } = Astro.props;
+// A card is an <article> whose title link stretches over the whole card, so
+// the photo credit's own links (licence, source) can sit inside it.
+const { href, eyebrow, title, text, word, image, filter = {} } = Astro.props;
 const data = Object.fromEntries(Object.entries(filter).map(([k, v]) => [`data-${k}`, v]));
+const credit = creditHtml(image);
 ---
 
-<a class="card" href={href} {...data} data-filter-item={Object.keys(filter).length ? '' : undefined}>
-  <Frame word={word} />
+<article class="card" {...data} data-filter-item={Object.keys(filter).length ? '' : undefined}>
+  <Frame word={word} image={image} sizes="(max-width: 640px) 100vw, (max-width: 960px) 50vw, 400px" />
   <div class="card__body">
     {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-    <h3>{title}</h3>
+    <h3><a class="card__link" href={href}>{title}</a></h3>
     {text && <p>{text}</p>}
   </div>
-</a>
+  {credit && <p class="card__credit caption" set:html={credit} />}
+</article>

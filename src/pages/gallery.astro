@@ -3,9 +3,11 @@ import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import Section from '../components/Section.astro';
 import Filters from '../components/Filters.astro';
+import Frame from '../components/Frame.astro';
 import Signup from '../components/Signup.astro';
 import { sec, blocks, prefixed } from '../lib/copy.js';
-import { SITE_NAME, BRANDS, MODELS } from '../lib/site.js';
+import { SITE_NAME, BRANDS, MODELS, creditHtml } from '../lib/site.js';
+import { MODEL_IMAGES, BRAND_IMAGES, PAGE_IMAGES } from '../data/images.js';
 
 const s = sec('Gallery');
 const [brand, model, generation] = s.f('Filters').split(' · ');
@@ -15,6 +17,27 @@ const groups = [
   { key: 'generation', label: generation, options: MODELS.flatMap((m) => m.codes) },
 ];
 const illustrations = s.h2('Illustrations');
+
+// Each photo links to its model page; brand photos, whose cars have no model
+// page yet, link to their brand page.
+const modelItems = MODELS.filter((m) => MODEL_IMAGES[m.slug]).map((m) => ({
+  set: MODEL_IMAGES[m.slug],
+  href: m.href,
+  filter: { brand: m.brand, model: m.short, generation: MODEL_IMAGES[m.slug].generation },
+}));
+const brandItems = BRANDS.filter((b) => BRAND_IMAGES[b.slug]).map((b) => ({
+  set: BRAND_IMAGES[b.slug],
+  href: b.href,
+  filter: { brand: b.name },
+}));
+const items = [...modelItems, ...brandItems];
+const photos = items.map((i) => ({ ...i, image: i.set.card }));
+const pictures = [
+  ...items.map((i) => ({ ...i, image: i.set.hero })),
+  ...Object.values(PAGE_IMAGES).map((image) => ({ image, set: { caption: image.alt }, filter: {} })),
+];
+const dataAttrs = (filter) => Object.fromEntries(Object.entries(filter).filter(([, v]) => v).map(([k, v]) => [`data-${k}`, v]));
+const sizes = '(max-width: 640px) 100vw, (max-width: 960px) 50vw, 400px';
 ---
 
 <Base title={s.f('Title')} description={s.f('Description')} active="Gallery">
@@ -23,14 +46,53 @@ const illustrations = s.h2('Illustrations');
   <section class="section">
     <div class="wrap stack">
       <Filters groups={groups} />
-      <!-- No licensed photos have been supplied yet, so every filter is empty. -->
-      <p class="empty" data-filter-empty>{s.f('Empty-filter message')}</p>
+      <div class="gallery">
+        {
+          photos.map((p) => (
+            <figure class="tile" data-filter-item {...dataAttrs(p.filter)}>
+              <a class="tile__image" href={p.href} aria-label={p.set.caption}>
+                <Frame image={p.image} sizes={sizes} />
+              </a>
+              <figcaption>
+                <p class="tile__caption">{p.set.caption}</p>
+                <p class="caption" set:html={creditHtml(p.image)} />
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+      <p class="empty" data-filter-empty hidden>
+        {s.f('Empty-filter message')}
+      </p>
     </div>
   </section>
 
-  <Section title={illustrations.label} split>
-    <div class="prose">
-      <p>{prefixed(illustrations.body, 'Intro: ')}</p>
+  <Section title={illustrations.label}>
+    <div class="stack">
+      <div class="prose">
+        <p>{prefixed(illustrations.body, 'Intro: ')}</p>
+      </div>
+      <div class="gallery">
+        {
+          pictures.map((p) => (
+            <figure class="tile" data-filter-item {...dataAttrs(p.filter)}>
+              {p.href ? (
+                <a class="tile__image" href={p.href} aria-label={p.set.caption}>
+                  <Frame image={p.image} sizes={sizes} />
+                </a>
+              ) : (
+                <div class="tile__image">
+                  <Frame image={p.image} sizes={sizes} />
+                </div>
+              )}
+              <figcaption>
+                <p class="tile__caption">{p.set.caption}</p>
+                {creditHtml(p.image) && <p class="caption" set:html={creditHtml(p.image)} />}
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
     </div>
   </Section>
 

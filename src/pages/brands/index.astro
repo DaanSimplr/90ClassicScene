@@ -5,6 +5,7 @@ import Card from '../../components/Card.astro';
 import Signup from '../../components/Signup.astro';
 import { sec, blocks, paragraphs, leadItems } from '../../lib/copy.js';
 import { SITE_NAME, brandBy } from '../../lib/site.js';
+import { BRAND_IMAGES } from '../../data/images.js';
 
 const s = sec('Brands index');
 const opening = paragraphs(s.f('Opening'));
@@ -18,7 +19,7 @@ const brands = leadItems(s.f('Opening')).map((item) => ({ ...brandBy(item.lead),
   <section class="section">
     <div class="wrap">
       <div class="grid">
-        {brands.map((b) => <Card href={b.href} title={b.name} text={b.text} word={b.name} />)}
+        {brands.map((b) => <Card href={b.href} title={b.name} text={b.text} word={b.name} image={BRAND_IMAGES[b.slug]?.card} />)}
       </div>
     </div>
   </section>

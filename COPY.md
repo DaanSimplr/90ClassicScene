@@ -6,7 +6,6 @@ Draft copy for every page of the site. Nothing is built yet.
 
 **Placeholders.** Text in square brackets is not decided or not known yet:
 
-- `[SITE NAME]`: the site has no name yet.
 - `[EMAIL SERVICE]`: the service that sends the alerts is not chosen.
 - `[HOSTING PROVIDER]`: hosting is not chosen.
 - `[SOURCE]`: a citation that must be added during research.
@@ -28,7 +27,7 @@ Draft copy for every page of the site. Nothing is built yet.
 
 **Footer:**
 
-> [SITE NAME]: Japanese sports cars, with sources.
+> Shinyaso: Japanese sports cars, with sources.
 >
 > Models · Brands · The 1990s · Gallery · Articles · About · Privacy
 >
@@ -51,11 +50,15 @@ Draft copy for every page of the site. Nothing is built yet.
 
 **Photo credit line:** Photo: [photographer], [licence], via [source]
 
+**Note after the credit on colour-graded photos:** Colour graded.
+
+**Credit line under AI images made from a photo:** AI illustration based on a photo by [photographer], [licence], via [source]. Details may differ from the real car.
+
 ---
 
 ## 1. Home
 
-**Title:** [SITE NAME]: Japanese Sports Cars, Specs, Tuning and Builds
+**Title:** Shinyaso: Japanese Sports Cars, Specs, Tuning and Builds
 **Description:** Japanese sports cars of the 90s and beyond: sourced specs, tuning information, body kit options and documented builds for the Supra, Skyline GT-R, RX-7, NSX and more.
 **Target searches:** Japanese sports cars · 90s Japanese sports cars · JDM sports cars
 
@@ -92,8 +95,8 @@ Mitsubishi 3000GT · Toyota MR2 · Honda Integra · Nissan Silvia · Toyota Supr
 
 ## 2. Models index
 
-**Title:** Japanese Sports Car Models: Specs, Tuning and Builds | [SITE NAME]
-**Description:** Every model page on [SITE NAME], grouped by brand: history, sourced specs, tuning information, body kits and build examples.
+**Title:** Japanese Sports Car Models: Specs, Tuning and Builds | Shinyaso
+**Description:** Every model page on Shinyaso, grouped by brand: history, sourced specs, tuning information, body kits and build examples.
 **Target searches:** Japanese sports car models · 90s JDM cars list
 
 **H1:** Japanese sports car models
@@ -149,7 +152,7 @@ Links to the brand page, one related model and the 1990s page.
 
 ## 3. Mitsubishi 3000GT
 
-**Title:** Mitsubishi 3000GT (GTO): Specs, History, Tuning and Body Kits | [SITE NAME]
+**Title:** Mitsubishi 3000GT (GTO): Specs, History, Tuning and Body Kits | Shinyaso
 **Description:** The Mitsubishi 3000GT, sold in Japan as the GTO: history, sourced specs for the VR-4 and its siblings, tuning information, body kits and documented builds.
 **Target searches:** Mitsubishi 3000GT specs · Mitsubishi GTO history · 3000GT VR-4 tuning · 3000GT body kits
 
@@ -187,7 +190,7 @@ The 3000GT changed face several times from the factory, so many owners start by 
 
 ## 4. Toyota MR2
 
-**Title:** Toyota MR2: Specs, History, Tuning and Body Kits (AW11, SW20, ZZW30) | [SITE NAME]
+**Title:** Toyota MR2: Specs, History, Tuning and Body Kits (AW11, SW20, ZZW30) | Shinyaso
 **Description:** All three generations of the Toyota MR2: history, sourced specs for the AW11, SW20 and ZZW30, tuning information, body kits and documented builds.
 **Target searches:** Toyota MR2 specs · MR2 SW20 history · MR2 SW20 body kits · MR2 Turbo tuning
 
@@ -231,7 +234,7 @@ The SW20's shape drew a wide range of kits, from subtle lip-and-skirt sets to wi
 
 ## 5. Honda Integra
 
-**Title:** Honda Integra: Specs, History, Tuning and Body Kits (DA, DC2, DC5) | [SITE NAME]
+**Title:** Honda Integra: Specs, History, Tuning and Body Kits (DA, DC2, DC5) | Shinyaso
 **Description:** The Honda Integra from the first generation to the DC5: history, sourced specs for the Type R and its siblings, tuning information, body kits and documented builds.
 **Target searches:** Honda Integra specs · Integra Type R DC2 history · Integra DC2 tuning · Honda Integra body kits
 
@@ -274,7 +277,7 @@ Japanese and export Integras wore different front ends, so the first body change
 
 ## 6. Nissan Silvia
 
-**Title:** Nissan Silvia: Specs, History, Tuning and Body Kits (S13, S14, S15) | [SITE NAME]
+**Title:** Nissan Silvia: Specs, History, Tuning and Body Kits (S13, S14, S15) | Shinyaso
 **Description:** The Nissan Silvia S13, S14 and S15, with the 180SX, 200SX and 240SX: history, sourced specs, tuning information, body kits and documented builds.
 **Target searches:** Nissan Silvia S15 specs · Silvia S13 history · Silvia S14 body kits · Nissan Silvia tuning · 180SX specs
 
@@ -316,7 +319,7 @@ No car on this site has more kits. The Silvia was the canvas for the drift aero 
 
 ## 7. Toyota Supra
 
-**Title:** Toyota Supra: Specs, History, Tuning and Body Kits (A70, A80) | [SITE NAME]
+**Title:** Toyota Supra: Specs, History, Tuning and Body Kits (A70, A80) | Shinyaso
 **Description:** The Toyota Supra from the Celica Supra to the A80: history, sourced specs, 2JZ-GTE tuning information, body kits and documented builds.
 **Target searches:** Toyota Supra A80 specs · Supra MK4 history · 2JZ-GTE tuning · Supra A80 body kits
 
@@ -355,7 +358,7 @@ The A80's shape was already dramatic, so kits for it go one of two ways: quiet p
 
 ## 8. Nissan Skyline GT-R
 
-**Title:** Nissan Skyline GT-R: Specs, History, Tuning and Body Kits (R32, R33, R34) | [SITE NAME]
+**Title:** Nissan Skyline GT-R: Specs, History, Tuning and Body Kits (R32, R33, R34) | Shinyaso
 **Description:** The Nissan Skyline GT-R R32, R33 and R34: history, sourced specs, RB26DETT tuning information, body kits and documented builds.
 **Target searches:** Nissan Skyline GT-R R34 specs · Skyline GT-R R32 history · RB26DETT tuning · Skyline R33 GT-R body kits
 
@@ -395,7 +398,7 @@ GT-R aero tends to follow function, and the Nismo parts set the tone. Around the
 
 ## 9. Mazda RX-7
 
-**Title:** Mazda RX-7: Specs, History, Tuning and Body Kits (FB, FC, FD) | [SITE NAME]
+**Title:** Mazda RX-7: Specs, History, Tuning and Body Kits (FB, FC, FD) | Shinyaso
 **Description:** The Mazda RX-7 across three generations: history, sourced specs, 13B rotary tuning information, body kits and documented builds, with the detail on the FD.
 **Target searches:** Mazda RX-7 FD specs · RX-7 FC history · 13B-REW tuning · RX-7 FD body kits
 
@@ -436,7 +439,7 @@ The FD may have attracted more aero than any other car of its era, much of it fr
 
 ## 10. Honda NSX
 
-**Title:** Honda NSX: Specs, History, Tuning and Body Kits (NA1, NA2) | [SITE NAME]
+**Title:** Honda NSX: Specs, History, Tuning and Body Kits (NA1, NA2) | Shinyaso
 **Description:** The original Honda NSX: history, sourced specs for the NA1, NA2 and Type R, tuning information, body kits and documented builds.
 **Target searches:** Honda NSX NA1 specs · Honda NSX history · NSX Type R specs · Honda NSX tuning · NSX body kits
 
@@ -477,7 +480,7 @@ Much NSX body work follows the factory: Type R parts, and conversions between th
 
 ## 11. Brands index
 
-**Title:** Japanese Sports Car Brands: Toyota, Nissan, Honda, Mazda, Mitsubishi, Subaru | [SITE NAME]
+**Title:** Japanese Sports Car Brands: Toyota, Nissan, Honda, Mazda, Mitsubishi, Subaru | Shinyaso
 **Description:** Six Japanese brands and their sports cars: the lineage, the engineering each is known for, the motorsport record and the tuning houses.
 **Target searches:** Japanese sports car brands · Japanese car manufacturers sports cars
 
@@ -513,7 +516,7 @@ All six brand pages use the same four sections. Cars without a model page are na
 
 ## 12. Toyota
 
-**Title:** Toyota Sports Cars: History, Supra, MR2, Celica and TRD | [SITE NAME]
+**Title:** Toyota Sports Cars: History, Supra, MR2, Celica and TRD | Shinyaso
 **Description:** Toyota's sports cars from the 2000GT to the Supra and MR2: the lineage, the engines, the motorsport record and TRD.
 **Target searches:** Toyota sports cars · Toyota sports cars history · Toyota sports cars 90s · TRD
 
@@ -546,7 +549,7 @@ Toyota's sports cars have always come from a company better known for sensible o
 
 ## 13. Nissan
 
-**Title:** Nissan Sports Cars: History, Skyline GT-R, Silvia, Fairlady Z and Nismo | [SITE NAME]
+**Title:** Nissan Sports Cars: History, Skyline GT-R, Silvia, Fairlady Z and Nismo | Shinyaso
 **Description:** Nissan's sports cars from the Fairlady Z to the Skyline GT-R and Silvia: the lineage, the engines, the motorsport record and Nismo.
 **Target searches:** Nissan sports cars · Nissan sports cars history · Nissan sports cars 90s · Nismo
 
@@ -580,7 +583,7 @@ Nissan's sports cars cover a lot of ground: the Fairlady Z for the open road, th
 
 ## 14. Honda
 
-**Title:** Honda Sports Cars: History, NSX, Integra, Type R, VTEC and Mugen | [SITE NAME]
+**Title:** Honda Sports Cars: History, NSX, Integra, Type R, VTEC and Mugen | Shinyaso
 **Description:** Honda's sports cars from the S500 to the NSX and Integra Type R: the lineage, VTEC, the motorsport record and Mugen.
 **Target searches:** Honda sports cars · Honda sports cars history · Honda sports cars 90s · Mugen · Honda Type R history
 
@@ -610,7 +613,7 @@ Honda's sports cars are built around engines that rev, from the small S500 of 19
 
 ## 15. Mazda
 
-**Title:** Mazda Sports Cars: History, RX-7, MX-5, the Rotary and Mazdaspeed | [SITE NAME]
+**Title:** Mazda Sports Cars: History, RX-7, MX-5, the Rotary and Mazdaspeed | Shinyaso
 **Description:** Mazda's sports cars from the Cosmo Sport to the RX-7 and MX-5: the lineage, the rotary engine, Le Mans and Mazdaspeed.
 **Target searches:** Mazda sports cars · Mazda sports cars history · Mazda rotary engine history · Mazdaspeed
 
@@ -642,7 +645,7 @@ Mazda's sports cars come from a company that built rotary-engined sports cars fo
 
 ## 16. Mitsubishi
 
-**Title:** Mitsubishi Sports Cars: History, 3000GT, Lancer Evolution and Ralliart | [SITE NAME]
+**Title:** Mitsubishi Sports Cars: History, 3000GT, Lancer Evolution and Ralliart | Shinyaso
 **Description:** Mitsubishi's sports cars from the Starion to the 3000GT and Lancer Evolution: the lineage, the all-wheel-drive technology, the rally record and Ralliart.
 **Target searches:** Mitsubishi sports cars · Mitsubishi sports cars history · Mitsubishi sports cars 90s · Ralliart
 
@@ -674,7 +677,7 @@ Mitsubishi's sports cars were about technology and traction: turbocharging, all-
 
 ## 17. Subaru
 
-**Title:** Subaru Sports Cars: History, Impreza WRX STI, the Boxer Engine and STI | [SITE NAME]
+**Title:** Subaru Sports Cars: History, Impreza WRX STI, the Boxer Engine and STI | Shinyaso
 **Description:** Subaru's performance cars from the Legacy to the Impreza WRX STI: the lineage, the boxer engine and all-wheel drive, the rally record and STI.
 **Target searches:** Subaru sports cars · Subaru sports cars history · Impreza WRX STI history · Subaru STI
 
@@ -707,7 +710,7 @@ No Subaru has a full model page yet. The Impreza WRX STI is first in line.
 
 ## 18. The 1990s
 
-**Title:** 90s Japanese Sports Cars: The Golden Era, 1989 to 2002 | [SITE NAME]
+**Title:** 90s Japanese Sports Cars: The Golden Era, 1989 to 2002 | Shinyaso
 **Description:** Why the 1990s produced the Skyline GT-R, Supra, RX-7 and NSX, and why the era ended: boom money, the 280 PS agreement, the technology race and the tuning scene.
 **Target searches:** 90s Japanese sports cars · golden era of JDM · Japanese sports cars 1990s
 
@@ -779,7 +782,7 @@ Buyers were moving away from sports cars (source 5), and in 2002 Japan's emissio
 
 ## 19. Gallery
 
-**Title:** Japanese Sports Car Photos: Gallery by Model and Brand | [SITE NAME]
+**Title:** Japanese Sports Car Photos: Gallery by Model and Brand | Shinyaso
 **Description:** Photographs of Japanese sports cars, filtered by brand, model and generation, each captioned with the exact car, year and variant.
 **Target searches:** Japanese sports car photos · JDM car gallery (plus image search through captions)
 
@@ -806,7 +809,7 @@ Intro: The images in this section are AI-generated. They are here for atmosphere
 
 ## 20. Articles index
 
-**Title:** Articles: Deep Dives on Japanese Sports Cars | [SITE NAME]
+**Title:** Articles: Deep Dives on Japanese Sports Cars | Shinyaso
 **Description:** Long reads on Japanese sports cars: the 280 PS agreement, the RB26 and 2JZ, body kit makers, chassis codes and the history of drifting. All sourced.
 **Target searches:** Japanese sports car articles · JDM history articles
 
@@ -837,7 +840,7 @@ Each article below has its title, description, searches, opening and section out
 
 ## 21. Article: The 280 PS agreement
 
-**Title:** The 280 PS Gentlemen's Agreement: What These Cars Really Made | [SITE NAME]
+**Title:** The 280 PS Gentlemen's Agreement: What These Cars Really Made | Shinyaso
 **Description:** How Japan's carmakers came to cap advertised power at 280 PS, which cars were reported to make more, and how the agreement ended.
 **Target searches:** 280 PS gentlemen's agreement · JDM 276 hp limit
 
@@ -903,7 +906,7 @@ Honda launched a new Legend on 7 October 2004, rated at 300 PS (source 6). Honda
 
 ## 22. Article: RB26 and 2JZ
 
-**Title:** RB26 vs 2JZ: Why Two Straight-Sixes Became Tuning Legends | [SITE NAME]
+**Title:** RB26 vs 2JZ: Why Two Straight-Sixes Became Tuning Legends | Shinyaso
 **Description:** The Nissan RB26DETT and Toyota 2JZ-GTE compared: how each was designed, why both take big power, and where each one's limits are.
 **Target searches:** RB26 vs 2JZ · why is the 2JZ so strong
 
@@ -971,7 +974,7 @@ On these sources, the 2JZ-GTE's bottom end holds more power on standard parts, a
 
 ## 23. Article: The aero houses
 
-**Title:** 90s Japanese Body Kits: A Guide to the Aero Houses | [SITE NAME]
+**Title:** 90s Japanese Body Kits: A Guide to the Aero Houses | Shinyaso
 **Description:** The Japanese body kit makers of the 90s and early 2000s: who they were, what their styles looked like and which cars they built for.
 **Target searches:** 90s Japanese body kits · JDM body kit brands
 
@@ -1036,7 +1039,7 @@ Each model page lists the kits made for that car, by maker, with a link to the m
 
 ## 24. Article: Chassis codes explained
 
-**Title:** JDM Chassis Codes Explained: How to Read BNR32, JZA80 and FD3S | [SITE NAME]
+**Title:** JDM Chassis Codes Explained: How to Read BNR32, JZA80 and FD3S | Shinyaso
 **Description:** How Japanese chassis codes work, brand by brand: what the letters and numbers in BNR32, JZA80, SW20, DC2 and FD3S mean.
 **Target searches:** JDM chassis codes explained · what does BNR34 mean · Japanese chassis codes list
 
@@ -1118,7 +1121,7 @@ Every code used on this site, with the model, the years the spec tables cover an
 
 ## 25. Article: A history of drifting
 
-**Title:** History of Drifting: From Japan's Mountain Passes to D1 | [SITE NAME]
+**Title:** History of Drifting: From Japan's Mountain Passes to D1 | Shinyaso
 **Description:** How drifting grew from a racing technique and late-night mountain runs into an international motorsport, and the cars that carried it.
 **Target searches:** history of drifting · Japanese drift scene history · who invented drifting
 
@@ -1176,8 +1179,8 @@ One of the earliest recorded drift events outside Japan was Option's demonstrati
 
 ## 26. Get alerts
 
-**Title:** Get Alerts | [SITE NAME]
-**Description:** One short email when a new model page, article or set of photos goes live on [SITE NAME]. Alerts only, no newsletter.
+**Title:** Get Alerts | Shinyaso
+**Description:** One short email when a new model page, article or set of photos goes live on Shinyaso. Alerts only, no newsletter.
 **Target searches:** none. People reach this page from inside the site.
 
 **H1:** Get an alert when something new goes live
@@ -1209,14 +1212,14 @@ We ask for your email address and nothing else. See the privacy page for the det
 
 ## 27. About
 
-**Title:** About | [SITE NAME]
-**Description:** What [SITE NAME] is, why it exists and how its specs are sourced and checked.
+**Title:** About | Shinyaso
+**Description:** What Shinyaso is, why it exists and how its specs are sourced and checked.
 **Target searches:** none.
 
-**H1:** About [SITE NAME]
+**H1:** About Shinyaso
 
 **Opening:**
-[SITE NAME] is an independent enthusiast project about Japanese sports cars. It exists because there wasn't a site that put these classic cars where they look best, in a city at night, and treated the details seriously at the same time.
+Shinyaso is an independent enthusiast project about Japanese sports cars. It exists because there wasn't a site that put these classic cars where they look best, in a city at night, and treated the details seriously at the same time.
 
 **H2: Who it's for**
 People who already know the cars. There is no beginner's introduction here. The pages assume you know what a Skyline is and want to know exactly which gearbox the V-Spec had.
@@ -1241,8 +1244,8 @@ Corrections, sources and questions: daansimpelaar6@gmail.com
 
 ## 28. Privacy
 
-**Title:** Privacy | [SITE NAME]
-**Description:** What personal data [SITE NAME] collects, why, and how to have it removed.
+**Title:** Privacy | Shinyaso
+**Description:** What personal data Shinyaso collects, why, and how to have it removed.
 **Target searches:** none.
 
 **Note before launch:** this is a plain-language draft, not legal advice. Have it checked once the email service and hosting are chosen.
@@ -1253,7 +1256,7 @@ Corrections, sources and questions: daansimpelaar6@gmail.com
 The short version: this site collects your email address if you sign up for alerts, and nothing else. There are no visitor analytics and no tracking cookies.
 
 **H2: Who is responsible**
-[SITE NAME] is run by Daan Simpelaar, a private individual in the Netherlands. Contact: daansimpelaar6@gmail.com
+Shinyaso is run by Daan Simpelaar, a private individual in the Netherlands. Contact: daansimpelaar6@gmail.com
 
 **H2: What is collected, and why**
 If you sign up for alerts, your email address is stored so that alerts can be sent to you. It is used for nothing else. You give your consent when you sign up and confirm it by clicking the link in the confirmation email.
@@ -1278,7 +1281,7 @@ Last updated: [DATE]
 
 ## 29. Page not found (404)
 
-**Title:** Page Not Found | [SITE NAME]
+**Title:** Page Not Found | Shinyaso
 
 **H1:** Wrong turn
 

@@ -7,7 +7,7 @@ Facts this website should be built from. Anything not listed here is undecided; 
 - A showcase site about Japanese sports cars.
 - Scope: a broad overview, not limited to one car or one scene.
 - Language: English.
-- Name: not chosen yet.
+- Name: Shinyaso (logo: SHIN YASŌ, 深夜走). Chosen by the owner on 2026-11-15.
 
 ## Who it serves
 
@@ -46,6 +46,5 @@ Facts this website should be built from. Anything not listed here is undecided; 
 
 ## Open points (undecided)
 
-- Site name.
 - Tech stack and hosting.
 - Which service sends the email alerts.

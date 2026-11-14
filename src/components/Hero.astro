@@ -1,19 +1,27 @@
 ---
 import Frame from './Frame.astro';
 import { inline } from '../lib/copy.js';
+import { creditHtml } from '../lib/site.js';
 
-// With `word` or `wall` the hero has a full-bleed image frame and the green
-// underglow line. Without them it is a plain page head.
-const { eyebrow, title, lead, display = false, word, wall } = Astro.props;
-const framed = Boolean(word || wall);
+// With `image`, `word` or `wall` the hero has a full-bleed image frame and the
+// green underglow line. Without them it is a plain page head. An image's
+// credit sits directly under the line, in caption type.
+const { eyebrow, title, lead, display = false, word, wall, image } = Astro.props;
+const framed = Boolean(image || word || wall);
+const credit = creditHtml(image);
 ---
 
 <div class="hero">
   {
     framed && (
       <>
-        <Frame hero word={word} wall={wall} />
+        <Frame hero image={image} word={word} wall={wall} eager label={false} sizes="(max-width: 640px) 200vw, 100vw" />
         <div class="hero__line" />
+        {credit && (
+          <div class="wrap">
+            <p class="hero__credit caption" set:html={credit} />
+          </div>
+        )}
       </>
     )
   }

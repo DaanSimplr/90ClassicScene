@@ -6,7 +6,8 @@ import ModelCards from '../components/ModelCards.astro';
 import Rows from '../components/Rows.astro';
 import Signup from '../components/Signup.astro';
 import { sec, paragraphs, isActions, actions, inline, leadItems, LINKS } from '../lib/copy.js';
-import { SITE_NAME, MODELS, modelBy } from '../lib/site.js';
+import { SITE_NAME, modelBy } from '../lib/site.js';
+import { PAGE_IMAGES } from '../data/images.js';
 
 const s = sec('Home');
 const opening = paragraphs(s.f('Opening'));
@@ -20,12 +21,10 @@ const [what, start, other] = s.h2s;
 const startParas = paragraphs(start.body);
 const cars = startParas[0].split(' · ').map((name) => modelBy('name', name));
 const startActions = startParas.find(isActions);
-const marks = MODELS.map((m) => m.mark);
-const wall = [marks.slice(0, 3).join(' '), marks.slice(3, 6).join(' '), marks.slice(6).join(' ')];
 ---
 
 <Base title={s.f('Title')} description={s.f('Description')}>
-  <Hero eyebrow={SITE_NAME} title={s.f('H1')} lead={lead} display wall={wall}>
+  <Hero eyebrow={SITE_NAME} title={s.f('H1')} lead={lead} display image={PAGE_IMAGES.home}>
     <Fragment set:html={actions(heroActions)} />
   </Hero>
 

@@ -208,6 +208,18 @@ a:hover {
 .brand:hover {
   text-decoration: none;
 }
+/* The logo artwork on a transparent background, with the road fading out
+   above and below the lettering (scripts/logo.mjs). The lettering is 44px
+   tall inside the 63px image. It sits 20px below the header's centre line,
+   so its foot hangs over the top of the hero; z-index keeps it in front. */
+.brand__logo {
+  display: block;
+  position: relative;
+  z-index: 1;
+  width: auto;
+  height: 63px;
+  transform: translateY(20px);
+}
 .nav {
   display: flex;
   gap: var(--space-6);
@@ -377,6 +389,40 @@ a:hover {
     min-height: 200px;
   }
 }
+/* Real images fill the frame; the frame's ratio (or hero height) sets the crop. */
+.frame--image {
+  display: block;
+}
+.frame--image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Wide heroes cut top and bottom; the cars sit low in the frame, so keep more
+   of the bottom. An image's own `position` (inline style) overrides this. */
+.frame--hero.frame--image img {
+  object-position: 50% 65%;
+}
+/* Illustration label: part of the frame, along the bottom edge. */
+.frame__label {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: 0;
+  padding: var(--space-2) var(--space-4);
+  background: var(--night-900);
+  color: var(--ink);
+}
+.frame--hero .frame__label {
+  padding: var(--space-3) var(--space-6);
+}
+@media (max-width: 640px) {
+  .frame--hero .frame__label {
+    padding: var(--space-2) var(--space-4);
+  }
+}
 .frame--hero .frame__word {
   -webkit-text-stroke-width: 1.5px;
 }
@@ -411,6 +457,23 @@ a:hover {
 }
 .hero__text {
   padding-top: var(--space-12);
+}
+.hero__credit {
+  margin-top: var(--space-4);
+  max-width: var(--measure);
+}
+.wrap:has(.hero__credit) + .wrap .hero__text {
+  padding-top: var(--space-8);
+}
+.caption a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--night-600);
+  text-underline-offset: 2px;
+}
+.caption a:hover {
+  color: var(--ink);
+  text-decoration-color: currentColor;
 }
 .pagehead {
   padding-top: var(--space-16);
@@ -535,6 +598,7 @@ a:hover {
 }
 
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -544,13 +608,50 @@ a:hover {
   color: var(--ink);
   transition: border-color var(--speed);
 }
-.card:hover {
+.card:hover,
+.card:focus-within {
   border-color: var(--ink-muted);
-  text-decoration: none;
 }
 .card .frame {
   background: var(--night-900);
   border-bottom: 1px solid var(--night-600);
+}
+.card .frame--image img {
+  transition:
+    transform 600ms ease,
+    filter var(--speed);
+}
+.card:hover .frame--image img {
+  transform: scale(1.03);
+  filter: brightness(1.08);
+}
+/* The title link covers the whole card; the credit's links sit above it. */
+.card__link {
+  color: inherit;
+}
+.card__link:hover {
+  text-decoration: none;
+}
+.card__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.card__link:focus-visible {
+  outline: none;
+}
+.card:has(.card__link:focus-visible) {
+  outline: 2px solid var(--neon-cyan);
+  outline-offset: 2px;
+}
+/* Photo credit at the foot of the card, so credits line up along a row. */
+.card__credit {
+  position: relative;
+  z-index: 2;
+  margin: auto 0 0;
+  padding: var(--space-3) var(--space-6) var(--space-4);
+  border-top: 1px solid var(--night-600);
 }
 .card__body {
   display: grid;
@@ -816,6 +917,57 @@ a:hover {
   color: var(--ink);
   border-bottom-color: var(--neon-cyan);
 }
+.empty[hidden],
+.tile[hidden] {
+  display: none;
+}
+
+/* ---------- Gallery ---------- */
+
+.gallery {
+  display: grid;
+  gap: var(--space-8) var(--space-2);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+@media (max-width: 960px) {
+  .gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .gallery {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.tile {
+  margin: 0;
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+}
+.tile__image {
+  display: block;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: box-shadow var(--speed);
+}
+a.tile__image:hover,
+a.tile__image:focus-visible {
+  box-shadow:
+    0 0 0 1px var(--neon-cyan),
+    0 0 24px rgba(0, 208, 255, 0.25);
+}
+.tile figcaption {
+  display: grid;
+  gap: var(--space-1);
+}
+.tile__caption {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
 .empty {
   border: 1px solid var(--night-600);
   border-radius: var(--radius-md);

@@ -1,13 +1,30 @@
 ---
-// Stand-in for a photo that has not been supplied yet. It shows the page's
-// own name in outline type. Pass `src` and `alt` once a licensed photo exists.
-const { word, wall, hero = false, src, alt = '' } = Astro.props;
+import { srcset } from '../data/images.js';
+import { LABELS } from '../lib/site.js';
+
+// An image slot. With `image` (an entry from src/data/images.js) it shows the
+// picture; AI images get the illustration strip along the bottom edge, which
+// is part of the frame and cannot be hidden. Without `image` it shows the
+// stand-in: the page's own name in outline type.
+// `sizes` describes the rendered width for srcset; `eager` is for heroes.
+// `label={false}` leaves the strip off (heroes, DESIGN.md row 39).
+const { word, wall, hero = false, image, sizes = '100vw', eager = false, label = true } = Astro.props;
 ---
 
 {
-  src ? (
-    <div class:list={['frame', hero && 'frame--hero']}>
-      <img src={src} alt={alt} style="width:100%;height:100%;object-fit:cover" />
+  image ? (
+    <div class:list={['frame', 'frame--image', hero && 'frame--hero']}>
+      <img
+        src={image.src}
+        srcset={srcset(image.src, image.width)}
+        sizes={sizes}
+        alt={image.alt}
+        loading={eager ? 'eager' : 'lazy'}
+        fetchpriority={eager ? 'high' : undefined}
+        decoding="async"
+        style={image.position ? `object-position:${image.position}` : undefined}
+      />
+      {image.ai && label && <p class="frame__label eyebrow">{LABELS.strip}</p>}
     </div>
   ) : (
     <div class:list={['frame', hero && 'frame--hero']} aria-hidden="true">
