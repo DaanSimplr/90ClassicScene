@@ -4,6 +4,7 @@ import '@fontsource/chakra-petch/700.css';
 import '@fontsource/ibm-plex-sans/400.css';
 import '@fontsource/ibm-plex-sans/500.css';
 import '@fontsource/ibm-plex-mono/500.css';
+import Analytics from '@vercel/analytics/astro';
 import '../styles/global.css';
 import { NAV, FOOTER, SITE_NAME } from '../lib/site.js';
 import { inline } from '../lib/copy.js';
@@ -20,6 +21,7 @@ const { title, description, active } = Astro.props;
     {description && <meta name="description" content={description} />}
     <meta name="color-scheme" content="dark" />
     <link rel="icon" href="data:," />
+    <Analytics />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>

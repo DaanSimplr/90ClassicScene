@@ -1252,7 +1252,7 @@ Corrections, sources and questions: daansimpelaar6@gmail.com
 **H1:** Privacy
 
 **Opening:**
-The short version: this site collects your email address if you sign up for alerts, and nothing else. There are no visitor analytics and no tracking cookies.
+The short version: this site collects your email address if you sign up for alerts. It also counts page views with Vercel Web Analytics, for overall statistics only, without identifying you.
 
 **H2: Who is responsible**
 Shinyaso is run by Daan Simpelaar, a private individual in the Netherlands. Contact: daansimpelaar6@gmail.com
@@ -1267,7 +1267,9 @@ Alerts are sent through [EMAIL SERVICE], which stores the list and delivers the 
 Until you unsubscribe. When you do, your address is removed from the list. Addresses that are never confirmed are deleted. [Confirm the period once the email service is chosen.]
 
 **H2: Analytics and cookies**
-The site uses no visitor analytics and sets no tracking cookies. The site is hosted by Vercel, which may keep standard server logs.
+The site uses Vercel Web Analytics to see which pages are read. For each page view it records the time, the page address, the site you came from, your approximate location (country, region and city), and your browser, operating system and type of device. To tell visits apart it uses a code made from your request, which is discarded after 24 hours. According to Vercel, this is used for overall statistics only, is not tied to you or your IP address, and works without third-party cookies.
+
+The site is hosted by Vercel, which may keep standard server logs.
 
 **H2: Your rights**
 You can unsubscribe at any time with the link in any alert. You can also ask to see the data held about you, or to have it corrected or deleted, by emailing daansimpelaar6@gmail.com. If you believe your data has been handled wrongly, you can complain to the Dutch data protection authority, the Autoriteit Persoonsgegevens.

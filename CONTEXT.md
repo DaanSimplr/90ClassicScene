@@ -9,6 +9,7 @@ Facts this website should be built from. Anything not listed here is undecided; 
 - Language: English.
 - Name: Shinyaso (logo: SHIN YASŌ, 深夜走). Chosen by the owner on 2026-11-15.
 - Built with Astro as a static site, hosted on Vercel (free Hobby plan, which is for non-commercial use). Hosting chosen by the owner on 2026-11-15.
+- Page views are counted with Vercel Web Analytics. Added by the owner on 2026-11-15.
 
 ## Who it serves
 

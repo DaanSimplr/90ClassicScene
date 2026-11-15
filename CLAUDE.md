@@ -37,7 +37,7 @@ Read the relevant one before changing anything. They outrank your own judgement.
 ## Rules that are easy to break by accident
 
 - **No invented facts.** Specs and history must come from a source that was actually read, and must be cited. If no source states something, leave the dash or say so. This applies to code comments and alt text too.
-- **No third-party embeds or tracking.** Fonts are self-hosted through `@fontsource` packages, not Google Fonts. The privacy page depends on this.
+- **No third-party embeds or tracking, apart from Vercel Web Analytics.** Fonts are self-hosted through `@fontsource` packages, not Google Fonts. Vercel Web Analytics (`<Analytics />` in `Base.astro`) is the only analytics, added by the owner; do not add others (Speed Insights included) without asking. The privacy page lists exactly what it collects, so update the "Analytics and cookies" section in COPY.md if that changes.
 - **Images:** card and gallery images are licensed Wikimedia Commons photos, colour graded, with a credit. Model and brand heroes are AI night restyles of those photos and must say so in the credit line under them. AI images are never used as a reference for what a car looks like or its specs.
 - **Colour:** at most two accent colours on screen at once, one magenta element per screen area, no gradients between neons, no glow on text. Magenta fills only the alert signup button (and the active nav marker).
 - **Email alerts:** no email service is chosen, so `AlertForm.astro` only validates the address and shows the "something went wrong" message. Do not wire it to a service or pick one.
