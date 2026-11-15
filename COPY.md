@@ -1265,7 +1265,7 @@ If you sign up for alerts, your email address is stored so that alerts can be se
 Alerts are sent through EmailOctopus, which stores the list in the European Union and delivers the emails on this site's behalf. Your address is not sold or shared with anyone else.
 
 **H2: How long it is kept**
-Until you unsubscribe. When you do, your address is removed from the list. Addresses that are never confirmed are deleted. [Confirm the period once the email service is chosen.]
+Until you unsubscribe. When you do, your address is removed from the list. If you never click the confirmation link, you get no alerts: unconfirmed addresses are not emailed. They stay with the list until they are cleared out by hand. To have yours removed sooner, email daansimpelaar6@gmail.com.
 
 **H2: Analytics and cookies**
 The site uses Vercel Web Analytics to see which pages are read. For each page view it records the time, the page address, the site you came from, your approximate location (country, region and city), and your browser, operating system and type of device. To tell visits apart it uses a code made from your request, which is discarded after 24 hours. According to Vercel, this is used for overall statistics only, is not tied to you or your IP address, and works without third-party cookies.
