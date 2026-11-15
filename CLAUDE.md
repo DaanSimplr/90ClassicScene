@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Always address the user as "Daan".
+Address the user with Daan somewhere in every response.
 
 A static showcase site about Japanese sports cars (90s JDM), in English, for enthusiasts who already know the cars. Built with Astro 7, no UI framework, plain CSS. The site is called Shinyaso; the header shows its logo image.
 
@@ -17,7 +17,7 @@ There are no tests and no linter. Development is on Windows.
 
 Read the relevant one before changing anything. They outrank your own judgement.
 
-- **CONTEXT.md**: the facts the site is built from. Anything not in it is undecided; do not invent it (hosting and the email service are still open).
+- **CONTEXT.md**: the facts the site is built from. Anything not in it is undecided; do not invent it (the email service is still open). The site is hosted on Vercel's free Hobby plan, which is for non-commercial use: flag it if a change would add ads, affiliate links or paid content.
 - **COPY.md**: every word on the site. Pages render text from this file at build time, so to change copy, edit COPY.md, not the `.astro` files. Do not write new copy the owner has not approved.
 - **DESIGN.md**: colours, fonts, spacing, components, imagery rules, and an append-only **decision log**. Every new design choice gets a new row at the bottom; never edit an old row, add a row that replaces it. Note who decided (Owner, or "Claude, for the owner to confirm").
 - **TODO.md**: parked items. **Do not build, write copy for, or act on anything in it** unless the owner asks for that item in chat.

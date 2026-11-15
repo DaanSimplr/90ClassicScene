@@ -1,13 +1,12 @@
 # COPY.md
 
-Draft copy for every page of the site. Nothing is built yet.
+Draft copy for every page of the site.
 
 ## Read this first
 
 **Placeholders.** Text in square brackets is not decided or not known yet:
 
 - `[EMAIL SERVICE]`: the service that sends the alerts is not chosen.
-- `[HOSTING PROVIDER]`: hosting is not chosen.
 - `[SOURCE]`: a citation that must be added during research.
 
 **Facts are not verified yet.** Every date, chassis code, engine name and production fact in this draft was written from general knowledge, without sources. CONTEXT.md says specs and history must be researched and verified, so before any page goes live:
@@ -1268,7 +1267,7 @@ Alerts are sent through [EMAIL SERVICE], which stores the list and delivers the 
 Until you unsubscribe. When you do, your address is removed from the list. Addresses that are never confirmed are deleted. [Confirm the period once the email service is chosen.]
 
 **H2: Analytics and cookies**
-The site uses no visitor analytics and sets no tracking cookies. The site is hosted by [HOSTING PROVIDER], which may keep standard server logs. [Confirm once hosting is chosen.]
+The site uses no visitor analytics and sets no tracking cookies. The site is hosted by Vercel, which may keep standard server logs.
 
 **H2: Your rights**
 You can unsubscribe at any time with the link in any alert. You can also ask to see the data held about you, or to have it corrected or deleted, by emailing daansimpelaar6@gmail.com. If you believe your data has been handled wrongly, you can complain to the Dutch data protection authority, the Autoriteit Persoonsgegevens.

@@ -210,15 +210,16 @@ a:hover {
 }
 /* The logo artwork on a transparent background, with the road fading out
    above and below the lettering (scripts/logo.mjs). The lettering is 44px
-   tall inside the 63px image. It sits 20px below the header's centre line,
-   so its foot hangs over the top of the hero; z-index keeps it in front. */
+   tall inside the 63px image. It sits 5px below the header's centre line,
+   so the lettering runs from 15px to 59px, just above the hero; the faded
+   road reaches past the header's edges and z-index keeps it in front. */
 .brand__logo {
   display: block;
   position: relative;
   z-index: 1;
   width: auto;
   height: 63px;
-  transform: translateY(20px);
+  transform: translateY(5px);
 }
 .nav {
   display: flex;
