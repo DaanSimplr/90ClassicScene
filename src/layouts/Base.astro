@@ -85,7 +85,7 @@ const { title, description, active } = Astro.props;
           }
         </ul>
         <p set:html={inline(FOOTER.corrections)} />
-        <p class="caption">{FOOTER.author}</p>
+        <p class="caption">{FOOTER.author}<br />{FOOTER.copyright}</p>
       </div>
     </footer>
   </body>

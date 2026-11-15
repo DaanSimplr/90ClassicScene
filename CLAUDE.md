@@ -7,8 +7,7 @@ A static showcase site about Japanese sports cars (90s JDM), in English, for ent
 ## Commands
 
 - `npm run dev`: dev server on http://localhost:4321 (also the `site` entry in `.claude/launch.json`).
-- `npm run build`: static build into `dist/`. This is the main check: a missing COPY.md section or field makes the build fail with a clear error.
-- `npm run preview`: serve the built `dist/`.
+- `npm run build`: builds into `.vercel/output/` (the `@astrojs/vercel` adapter): every page prerendered as static HTML, plus one function for `/api/subscribe`. This is the main check: a missing COPY.md section or field makes the build fail with a clear error. There is no `npm run preview`; the Vercel adapter does not support it, so check pages in the dev server.
 - `node scripts/image-sizes.mjs`: after adding or replacing an image in `public/images`, makes the `-640`, `-1200` and `-1800` copies that srcset uses. It uses `sharp`, which comes in through Astro and is not a direct dependency.
 
 There are no tests and no linter. Development is on Windows.
@@ -17,7 +16,7 @@ There are no tests and no linter. Development is on Windows.
 
 Read the relevant one before changing anything. They outrank your own judgement.
 
-- **CONTEXT.md**: the facts the site is built from. Anything not in it is undecided; do not invent it (the email service is still open). The site is hosted on Vercel's free Hobby plan, which is for non-commercial use: flag it if a change would add ads, affiliate links or paid content.
+- **CONTEXT.md**: the facts the site is built from. Anything not in it is undecided; do not invent it. The site is hosted on Vercel's free Hobby plan, which is for non-commercial use: flag it if a change would add ads, affiliate links or paid content.
 - **COPY.md**: every word on the site. Pages render text from this file at build time, so to change copy, edit COPY.md, not the `.astro` files. Do not write new copy the owner has not approved.
 - **DESIGN.md**: colours, fonts, spacing, components, imagery rules, and an append-only **decision log**. Every new design choice gets a new row at the bottom; never edit an old row, add a row that replaces it. Note who decided (Owner, or "Claude, for the owner to confirm").
 - **TODO.md**: parked items. **Do not build, write copy for, or act on anything in it** unless the owner asks for that item in chat.
@@ -32,6 +31,7 @@ Read the relevant one before changing anything. They outrank your own judgement.
 - `src/data/models.js` (`RESEARCH`): researched spec rows, history sources, tuning, kits and builds per model slug. Each value cites a source id. `null` shows as a dash and means no source states the value; never fill one in from memory.
 - `src/data/images.js`: every image slot (`PAGE_IMAGES`, `MODEL_IMAGES`, `BRAND_IMAGES`) with alt text, licence, author and source. See the comment at the top of that file and DESIGN.md rows 30, 34 and 38.
 - `src/components/`: small Astro components (Hero, Section, Card, Frame, Rows, Entries, Sources, Signup, AlertForm...). `src/layouts/Base.astro` is the page shell.
+- `src/pages/api/subscribe.js`: the only on-demand route (`prerender = false`). `AlertForm.astro` posts the address here; it adds it to the EmailOctopus list as "pending" (EmailOctopus then sends the double opt-in email) and answers `ok`, `already`, `invalid` or `failed`, which the form maps to the COPY.md messages. A plain form post (no JavaScript) is redirected back to `#alert-<result>`. It needs `EMAILOCTOPUS_API_KEY` and `EMAILOCTOPUS_LIST_ID`: in `.env` locally (see `.env.example`; `.env` is gitignored) and in Vercel's Environment Variables. Never commit or print the key.
 - `src/styles/global.css`: the single stylesheet. The design tokens at the top match DESIGN.md exactly; use the tokens, do not add new colours.
 
 ## Rules that are easy to break by accident
@@ -40,7 +40,7 @@ Read the relevant one before changing anything. They outrank your own judgement.
 - **No third-party embeds or tracking, apart from Vercel Web Analytics.** Fonts are self-hosted through `@fontsource` packages, not Google Fonts. Vercel Web Analytics (`<Analytics />` in `Base.astro`) is the only analytics, added by the owner; do not add others (Speed Insights included) without asking. The privacy page lists exactly what it collects, so update the "Analytics and cookies" section in COPY.md if that changes.
 - **Images:** card and gallery images are licensed Wikimedia Commons photos, colour graded, with a credit. Model and brand heroes are AI night restyles of those photos and must say so in the credit line under them. AI images are never used as a reference for what a car looks like or its specs.
 - **Colour:** at most two accent colours on screen at once, one magenta element per screen area, no gradients between neons, no glow on text. Magenta fills only the alert signup button (and the active nav marker).
-- **Email alerts:** no email service is chosen, so `AlertForm.astro` only validates the address and shows the "something went wrong" message. Do not wire it to a service or pick one.
+- **Email alerts:** sent with EmailOctopus (chosen by the owner), double opt-in only: never add contacts as "subscribed" directly. The privacy page says the address is used for nothing else and where the list is stored; keep it true if the signup or the service changes.
 - **Personal details:** the owner's email in COPY.md is intentional (corrections contact). Do not add other personal data.
 
 ## Working with the owner

@@ -13,6 +13,7 @@ export const FOOTER = {
   links: footer[1].split(' · ').map((label) => ({ label, href: LINKS[label] })),
   corrections: footer[2],
   author: footer[3],
+  copyright: footer[4],
 };
 // The site name, taken from the footer line in COPY.md. The header shows the
 // logo image instead and uses this as its alt text.

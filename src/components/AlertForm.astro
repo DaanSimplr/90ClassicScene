@@ -1,16 +1,25 @@
 ---
-import { sec, inline } from '../lib/copy.js';
+import { sec, inline, quote } from '../lib/copy.js';
 import { SIGNUP } from '../lib/site.js';
 
-// No email service is chosen yet (CONTEXT.md), so nothing can be saved. The
-// form checks the address and then says so, using the messages from COPY.md.
+// Sends the address to /api/subscribe (src/pages/api/subscribe.js), which adds
+// it to the EmailOctopus list; EmailOctopus then sends the confirmation email.
+// Every message shown here comes from the "Get alerts" section of COPY.md.
 const alerts = sec('Get alerts');
+const sent = quote(alerts.f('After submitting'))[0];
 const invalid = alerts.f('Error: invalid address');
+const already = alerts.f('Error: already subscribed');
 const failed = alerts.f('Error: something went wrong');
 const { page = false } = Astro.props;
 ---
 
-<form class:list={['form', page && 'form--page']} method="post" novalidate data-alert-form>
+<form
+  class:list={['form', page && 'form--page']}
+  action="/api/subscribe"
+  method="post"
+  novalidate
+  data-alert-form
+>
   <div class="form__row">
     <div class="field">
       <input
@@ -24,24 +33,73 @@ const { page = false } = Astro.props;
     </div>
     <button class="btn btn--alert" type="submit">{SIGNUP.buttonLabel}</button>
   </div>
-  <p class="form__msg" role="alert" data-msg="invalid" hidden>
+  <!-- Left empty by people (it is off-screen and skipped by keyboard and screen
+       readers); bots that fill every field are ignored by the endpoint. -->
+  <div class="form__trap" aria-hidden="true">
+    <input type="text" name="website" tabindex="-1" autocomplete="off" />
+  </div>
+  <p class="form__msg" role="status" id="alert-ok" data-msg="ok" hidden set:html={inline(sent)} />
+  <p class="form__msg" role="alert" id="alert-invalid" data-msg="invalid" hidden>
     Error: <Fragment set:html={inline(invalid)} />
   </p>
-  <p class="form__msg" role="alert" data-msg="failed" hidden>
+  <p class="form__msg" role="alert" id="alert-already" data-msg="already" hidden>
+    Error: <Fragment set:html={inline(already)} />
+  </p>
+  <p class="form__msg" role="alert" id="alert-failed" data-msg="failed" hidden>
     Error: <Fragment set:html={inline(failed)} />
   </p>
 </form>
 
 <script>
-  document.querySelectorAll('[data-alert-form]').forEach((form) => {
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const value = form.querySelector('input').value.trim();
-      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-      form.classList.add('is-error');
-      form.querySelectorAll('[data-msg]').forEach((msg) => {
-        msg.hidden = msg.dataset.msg !== (valid ? 'failed' : 'invalid');
+  const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // After a plain form post (submitted before this script loaded, or with
+  // JavaScript off), the endpoint sends the visitor back to #alert-<result>.
+  // Without this script the stylesheet shows that message with :target; with
+  // it (.is-js), the script shows it and removes the hash from the address.
+  document.querySelectorAll<HTMLFormElement>('[data-alert-form]').forEach((form) => {
+    const input = form.querySelector<HTMLInputElement>('input[name="email"]')!;
+    const trap = form.querySelector<HTMLInputElement>('input[name="website"]')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+
+    const show = (result: string) => {
+      form.classList.toggle('is-error', result !== 'ok');
+      form.querySelectorAll<HTMLElement>('[data-msg]').forEach((msg) => {
+        msg.hidden = msg.dataset.msg !== result;
       });
+    };
+
+    form.classList.add('is-js');
+    const fromHash = location.hash.match(/^#alert-(ok|already|invalid|failed)$/);
+    if (fromHash) {
+      show(fromHash[1]);
+      history.replaceState(null, '', location.pathname + location.search);
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (button.disabled) return;
+      const email = input.value.trim();
+      if (!EMAIL.test(email)) return show('invalid');
+
+      button.disabled = true;
+      form.setAttribute('aria-busy', 'true');
+      let result = 'failed';
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, website: trap.value }),
+        });
+        const data = await res.json();
+        if (['ok', 'already', 'invalid', 'failed'].includes(data?.result)) result = data.result;
+      } catch {
+        result = 'failed';
+      }
+      button.disabled = false;
+      form.removeAttribute('aria-busy');
+      if (result === 'ok') input.value = '';
+      show(result);
     });
   });
 </script>

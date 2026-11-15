@@ -1084,6 +1084,22 @@ a.tile__image:focus-visible {
 .form__caption {
   margin-top: var(--space-3);
 }
+/* Without JavaScript the signup endpoint redirects back to #alert-<result>,
+   so the matching message is shown by :target instead of by the script.
+   There is one alert form per page, so the ids are unique. Once the script
+   runs it adds .is-js and shows the message itself. */
+.form:not(.is-js) .form__msg:target {
+  display: block;
+}
+/* Spam trap field in AlertForm: off-screen rather than display:none, which
+   some bots skip. */
+.form__trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
 @media (max-width: 520px) {
   .form__row {
     flex-direction: column;

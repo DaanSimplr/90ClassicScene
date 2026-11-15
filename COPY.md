@@ -6,7 +6,6 @@ Draft copy for every page of the site.
 
 **Placeholders.** Text in square brackets is not decided or not known yet:
 
-- `[EMAIL SERVICE]`: the service that sends the alerts is not chosen.
 - `[SOURCE]`: a citation that must be added during research.
 
 **Facts are not verified yet.** Every date, chassis code, engine name and production fact in this draft was written from general knowledge, without sources. CONTEXT.md says specs and history must be researched and verified, so before any page goes live:
@@ -30,9 +29,11 @@ Draft copy for every page of the site.
 >
 > Models · Brands · The 1990s · Gallery · Articles · About · Privacy
 >
-> Found a mistake? Email daansimpelaar6@gmail.com
+> Do you have ideas or did you find a mistake? Email daansimpelaar6@gmail.com
 >
 > Site by Daan Simpelaar
+>
+> © 2026 Daan Simpelaar. Photos belong to their credited authors and are used under the licences shown with them.
 
 **Alert signup box** (used at the foot of most pages; the first line changes per page):
 
@@ -1200,7 +1201,7 @@ We ask for your email address and nothing else. See the privacy page for the det
 **After submitting:**
 > **Check your inbox.** We've sent a confirmation email. Click the link in it and you're on the list. If it hasn't arrived in a few minutes, look in your spam folder.
 
-**After confirming:**
+**After confirming** (not on this site: pasted into EmailOctopus as the list's Success page; edit it there too):
 > **You're on the list.** You'll get an email the next time something goes live. Until then: [Browse the models]
 
 **Error: invalid address:** That doesn't look like an email address. Check it and try again.
@@ -1261,7 +1262,7 @@ Shinyaso is run by Daan Simpelaar, a private individual in the Netherlands. Cont
 If you sign up for alerts, your email address is stored so that alerts can be sent to you. It is used for nothing else. You give your consent when you sign up and confirm it by clicking the link in the confirmation email.
 
 **H2: Who else handles it**
-Alerts are sent through [EMAIL SERVICE], which stores the list and delivers the emails on this site's behalf. Your address is not sold or shared with anyone else.
+Alerts are sent through EmailOctopus, which stores the list in the European Union and delivers the emails on this site's behalf. Your address is not sold or shared with anyone else.
 
 **H2: How long it is kept**
 Until you unsubscribe. When you do, your address is removed from the list. Addresses that are never confirmed are deleted. [Confirm the period once the email service is chosen.]
@@ -1276,7 +1277,7 @@ You can unsubscribe at any time with the link in any alert. You can also ask to 
 
 **H2: Changes**
 If this page changes, the date below changes with it.
-Last updated: [DATE]
+Last updated: 15 November 2026
 
 ---
 
