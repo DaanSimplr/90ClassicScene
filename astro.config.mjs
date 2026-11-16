@@ -1,13 +1,19 @@
 import { defineConfig, envField } from 'astro/config';
 import vercel from '@astrojs/vercel';
 
+import sitemap from '@astrojs/sitemap';
+
 export default defineConfig({
+  site: 'https://shinyaso.com',
+  
   devToolbar: { enabled: false },
   server: { port: 4321 },
+
   // Every page stays static. The adapter is only there so the one endpoint
   // with `prerender = false` (src/pages/api/subscribe.js) runs as a Vercel
   // function.
   adapter: vercel(),
+
   // Secrets for the alert signup, read only on the server. Locally they come
   // from .env; on Vercel from the project's Environment Variables. Optional so
   // the site still builds without them; the endpoint then answers with an error.
@@ -17,4 +23,6 @@ export default defineConfig({
       EMAILOCTOPUS_LIST_ID: envField.string({ context: 'server', access: 'secret', optional: true }),
     },
   },
+
+  integrations: [sitemap()],
 });

@@ -8,6 +8,7 @@
     "build": "astro build"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.5",
     "@astrojs/vercel": "^11.0.22",
     "@fontsource/chakra-petch": "^5.3.0",
     "@fontsource/ibm-plex-mono": "^5.3.0",
