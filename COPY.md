@@ -34,6 +34,8 @@ Draft copy for every page of the site.
 > Site by Daan Simpelaar
 >
 > © 2026 Daan Simpelaar. Photos belong to their credited authors and are used under the licences shown with them.
+>
+> Like this website? Let me build one for you! Email daansimpelaar6@gmail.com
 
 **Alert signup box** (used at the foot of most pages; the first line changes per page):
 

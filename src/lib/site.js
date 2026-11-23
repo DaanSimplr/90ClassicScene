@@ -14,6 +14,9 @@ export const FOOTER = {
   corrections: footer[2],
   author: footer[3],
   copyright: footer[4],
+  // The owner's offer to build websites. Promotes a paid service, which the
+  // owner chose to accept on Vercel's non-commercial Hobby plan (CONTEXT.md).
+  hire: footer[5],
 };
 // The site name, taken from the footer line in COPY.md. The header shows the
 // logo image instead and uses this as its alt text.
